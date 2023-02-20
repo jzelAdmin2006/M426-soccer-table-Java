@@ -34,4 +34,34 @@ public class GameResultTest {
 		assertThat(homeTeamScoreResult).isOne();
 		assertThat(awayTeamScoreResult).isEqualTo(2);
 	}
+
+	@Test
+	void gameResultString_parseGameResult_isCorrect() {
+		GameResult gameResult = GameResult.parseGameResult("Hertha BSC 4:3 1. FC Köln");
+
+		Team homeTeamResult = gameResult.getHomeTeam();
+		Team awayTeamResult = gameResult.getAwayTeam();
+		int homeTeamScoreResult = gameResult.getHomeTeamScore();
+		int awayTeamScoreResult = gameResult.getAwayTeamScore();
+
+		assertThat(homeTeamResult).isEqualTo(new Team("Hertha BSC"));
+		assertThat(awayTeamResult).isEqualTo(new Team("1. FC Köln"));
+		assertThat(homeTeamScoreResult).isEqualTo(4);
+		assertThat(awayTeamScoreResult).isEqualTo(3);
+	}
+
+	@Test
+	void gameResultString_parseDifferentGameResult_isCorrect() {
+		GameResult gameResult = GameResult.parseGameResult("VfL Wolfsburg 2:1 FC Augsburg");
+
+		Team homeTeamResult = gameResult.getHomeTeam();
+		Team awayTeamResult = gameResult.getAwayTeam();
+		int homeTeamScoreResult = gameResult.getHomeTeamScore();
+		int awayTeamScoreResult = gameResult.getAwayTeamScore();
+
+		assertThat(homeTeamResult).isEqualTo(new Team("VfL Wolfsburg"));
+		assertThat(awayTeamResult).isEqualTo(new Team("FC Augsburg"));
+		assertThat(homeTeamScoreResult).isEqualTo(2);
+		assertThat(awayTeamScoreResult).isEqualTo(1);
+	}
 }

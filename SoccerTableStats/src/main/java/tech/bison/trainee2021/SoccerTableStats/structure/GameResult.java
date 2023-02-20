@@ -29,4 +29,18 @@ public class GameResult {
 	public int getAwayTeamScore() {
 		return awayTeamScore;
 	}
+
+	public static GameResult parseGameResult(String gameResult) {
+		String[] splitGameResult = gameResult.split(":");
+		String homeTeamResult = splitGameResult[0];
+		String awayTeamResult = splitGameResult[1];
+		int homeTeamResultLength = homeTeamResult.length();
+		return new GameResult(new Team(homeTeamResult.substring(0, homeTeamResultLength - 2)),
+				new Team(awayTeamResult.substring(2)), digitToInt(homeTeamResult.charAt(homeTeamResultLength - 1)),
+				digitToInt(awayTeamResult.charAt(0)));
+	}
+
+	private static int digitToInt(char digit) {
+		return digit - '0';
+	}
 }
