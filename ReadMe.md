@@ -1,5 +1,7 @@
 # Soccer Table Statistics
 
+![Soccer Table Statistics Theme Image](https://code.frickelbude.ch/johannes_zeller/soccer-table/raw/branch/master/img/channels4_profile.jpg)
+
 ## Fragen und Annahmen
 
 - Gibt es auch Teams mit einem Doppelpunkt im Namen? -> Annahme nein
