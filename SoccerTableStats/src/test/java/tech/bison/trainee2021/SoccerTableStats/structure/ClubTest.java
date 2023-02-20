@@ -13,4 +13,13 @@ public class ClubTest {
 
 		assertThat(result).isEqualTo("Name");
 	}
+
+	@Test
+	void newClubWithDifferentName_getName_isTheSame() {
+		Club club = new Club("Name2");
+
+		String result = club.getName();
+
+		assertThat(result).isEqualTo("Name2");
+	}
 }
