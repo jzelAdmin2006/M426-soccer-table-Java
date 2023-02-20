@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class ClubTest {
+public class TeamTest {
 	@Test
 	void newClubWithName_getName_isTheSame() {
-		Club club = new Club("Name");
+		Team club = new Team("Name");
 
 		String result = club.getName();
 
@@ -16,7 +16,7 @@ public class ClubTest {
 
 	@Test
 	void newClubWithDifferentName_getName_isTheSame() {
-		Club club = new Club("Name2");
+		Team club = new Team("Name2");
 
 		String result = club.getName();
 

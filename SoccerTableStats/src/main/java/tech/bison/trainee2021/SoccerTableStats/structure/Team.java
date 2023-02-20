@@ -1,10 +1,10 @@
 package tech.bison.trainee2021.SoccerTableStats.structure;
 
-public class Club {
+public class Team {
 
 	private String name;
 
-	public Club(String name) {
+	public Team(String name) {
 		this.name = name;
 	}
 
