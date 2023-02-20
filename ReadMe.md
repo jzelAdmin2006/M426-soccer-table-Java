@@ -1,4 +1,4 @@
-# soccer statistics
+# Soccer Table Statistics
 
 ## Fragen und Annahmen
 
