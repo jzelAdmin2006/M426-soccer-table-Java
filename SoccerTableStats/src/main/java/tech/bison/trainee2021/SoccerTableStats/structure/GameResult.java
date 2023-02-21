@@ -1,5 +1,7 @@
 package tech.bison.trainee2021.SoccerTableStats.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,11 +35,19 @@ public class GameResult {
 		return awayTeamScore;
 	}
 
+	public static List<GameResult> parseGameResults(String gameResultsToParse) {
+		Matcher matcher = Pattern.compile("^(.*?)\\s(\\d+):(\\d+)\\s(.*)$", Pattern.MULTILINE)
+				.matcher(gameResultsToParse);
+		List<GameResult> gameResults = new ArrayList<>();
+		while (matcher.find()) {
+			gameResults.add(new GameResult(new Team(matcher.group(1)), new Team(matcher.group(4)),
+					Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3))));
+		}
+		return gameResults;
+	}
+
 	public static GameResult parseGameResult(String gameResult) {
-		Matcher matcher = Pattern.compile("(.*?)\\s(\\d+):(\\d+)\\s(.*)").matcher(gameResult);
-		matcher.find();
-		return new GameResult(new Team(matcher.group(1)), new Team(matcher.group(4)),
-				Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
+		return parseGameResults(gameResult).get(0);
 	}
 
 	private static int digitToInt(char digit) {
