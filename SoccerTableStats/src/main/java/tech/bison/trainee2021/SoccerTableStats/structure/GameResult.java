@@ -49,8 +49,4 @@ public class GameResult {
 	public static GameResult parseGameResult(String gameResult) {
 		return parseGameResults(gameResult).get(0);
 	}
-
-	private static int digitToInt(char digit) {
-		return digit - '0';
-	}
 }
