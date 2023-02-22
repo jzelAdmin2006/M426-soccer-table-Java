@@ -6,7 +6,7 @@
 
 ### ... on Windows
 
-set INPUT_FILES_LOCATION=C:/path/to/folder/containing/your/input/files set OUTPUT_FILES_LOCATION=C:/path/to/folder/later/containing/your/output/files&& java -jar SoccerTableStats.jar
+set INPUT_FILES_LOCATION=C:/path/to/folder/containing/your/input/files&& set OUTPUT_FILES_LOCATION=C:/path/to/folder/later/containing/your/output/files&& java -jar SoccerTableStats.jar
 
 ### ... on Linux
 
