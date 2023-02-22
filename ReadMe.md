@@ -15,7 +15,7 @@ choco install microsoft-openjdk17 17.0.6 -y;
 
 ### ... on Linux
 
-- 
+- sudo apt install openjdk-17-jdk openjdk-17-jre
 - env INPUT_FILES_LOCATION=~/path/to/folder/containing/your/input/files OUTPUT_FILES_LOCATION=~/path/to/folder/later/containing/your/output/files java -jar SoccerTableStats.jar
 
 ## Fragen und Annahmen
