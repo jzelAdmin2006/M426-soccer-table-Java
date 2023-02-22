@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-  mainClassName = 'tech.bison.trainee2021.SpotifySync'
+  mainClassName = 'tech.bison.trainee2021.SoccerTableStats.SoccerTableStats'
 }
 
 repositories {
@@ -12,9 +12,7 @@ repositories {
 }
 
 ext {
-  // https://search.maven.org/search?q=g:org.junit.jupiter%20AND%20a:junit-jupiter
   junitVersion = '5.8.2'
-  // https://search.maven.org/search?q=g:org.assertj%20AND%20a:assertj-core
   assertjVersion = '3.22.0'
 }
 
@@ -22,8 +20,6 @@ dependencies {
   testImplementation "org.assertj:assertj-core:${assertjVersion}"
   testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
   testRuntimeOnly    "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-  implementation "se.michaelthelin.spotify:spotify-web-api-java:7.3.0"
-  implementation "com.squareup.okhttp3:okhttp:3.14.6"
 }
 
 java {
@@ -34,12 +30,11 @@ java {
 
 wrapper {
   gradleVersion = '7.3.3'
-  // distributionUrl = 'https://repo.bison-group.com/artifactory/gradlew-distro/gradle-7.3.3-bin.zip'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'tech.bison.trainee2021.SpotifySync'
+        attributes 'Main-Class': 'tech.bison.trainee2021.SoccerTableStats.SoccerTableStats'
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from {
