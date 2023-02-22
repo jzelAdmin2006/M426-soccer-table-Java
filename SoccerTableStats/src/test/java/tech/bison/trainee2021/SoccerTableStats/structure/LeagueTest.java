@@ -2,6 +2,7 @@ package tech.bison.trainee2021.SoccerTableStats.structure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -167,5 +168,21 @@ public class LeagueTest {
 		assertThat(statisticsTable.get(new Team("Hertha BSC")).values()).containsExactly(14, 8, 12, 71, 65, 6, 50);
 		assertThat(statisticsTable.get(new Team("1. FC Köln")).values()).containsExactly(16, 6, 12, 70, 60, 10, 54);
 		assertThat(statisticsTable.get(new Team("VfL Wolfsburg")).values()).containsExactly(15, 7, 12, 69, 57, 12, 52);
+	}
+
+	@Test
+	void finishedBundesliga_getResultsTable_teamsAreCorrectlySorted() {
+		League league = new League();
+		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA));
+
+		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.getStatisticsTable();
+
+		assertThat(new ArrayList<>(statisticsTable.keySet())).containsExactly(new Team("Sport-Club Freiburg"),
+				new Team("1. FC Köln"), new Team("Bayer 04 Leverkusen"), new Team("VfL Wolfsburg"),
+				new Team("VfB Stuttgart"), new Team("Borussia Mönchengladbach"), new Team("Hertha BSC"),
+				new Team("Eintracht Frankfurt"), new Team("TSG Hoffenheim"), new Team("1. FC Union Berlin"),
+				new Team("VfL Bochum 1848"), new Team("FC Schalke 04"), new Team("SV Werder Bremen"),
+				new Team("FC Augsburg"), new Team("1. FSV Mainz 05"), new Team("FC Bayern München"),
+				new Team("Borussia Dortmund"), new Team("RB Leipzig"));
 	}
 }

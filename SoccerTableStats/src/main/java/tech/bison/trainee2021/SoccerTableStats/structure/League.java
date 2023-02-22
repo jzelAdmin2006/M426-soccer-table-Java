@@ -3,10 +3,14 @@ package tech.bison.trainee2021.SoccerTableStats.structure;
 import static java.util.Optional.ofNullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class League {
 	private static final int WIN_POINTS = 3;
@@ -32,7 +36,30 @@ public class League {
 			updateScoreStatistics(awayTeamScore, homeTeamScore, awayTeamStatistics);
 			updateOutcomeStatistics(homeTeamScore, awayTeamScore, homeTeamStatistics, awayTeamStatistics);
 		}
-		return statisticsTable;
+		return sortStats(statisticsTable, byPointsAndGoalDifference());
+	}
+
+	private Comparator<Entry<Team, Map<StatisticsTableColumn, Integer>>> byPointsAndGoalDifference() {
+		return Comparator
+				.comparing((Map.Entry<Team, Map<StatisticsTableColumn, Integer>> entry) -> entry.getValue()
+						.get(StatisticsTableColumn.POINTS))
+				.thenComparing(entry -> entry.getValue().get(StatisticsTableColumn.GOALDIFFERENCE))
+				.thenComparing(entry -> entry.getValue().get(StatisticsTableColumn.WINS));
+	}
+
+	private Map<Team, Map<StatisticsTableColumn, Integer>> sortStats(
+			Map<Team, Map<StatisticsTableColumn, Integer>> unsortedStats,
+			Comparator<Entry<Team, Map<StatisticsTableColumn, Integer>>> byValues) {
+		return unsortedStats.entrySet().stream().sorted(byValues.reversed())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, this::mergeMaps, LinkedHashMap::new));
+	}
+
+	private Map<StatisticsTableColumn, Integer> mergeMaps(Map<StatisticsTableColumn, Integer> firstMap,
+			Map<StatisticsTableColumn, Integer> secondMap) {
+		Map<StatisticsTableColumn, Integer> mergedMap = new LinkedHashMap<>(firstMap);
+		secondMap.forEach(
+				(key, value) -> mergedMap.merge(key, value, (firstValue, secondValue) -> firstValue + secondValue));
+		return mergedMap;
 	}
 
 	private void initializeTeamStatistics(Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable, Team team) {
