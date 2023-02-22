@@ -159,11 +159,11 @@ public class LeagueTest {
 			+ "SV Werder Bremen 2:1 1. FC Köln";
 
 	@Test
-	void finishedBundesliga_getResultsTable_isCorrectForFirstThreeTeams() {
+	void finishedBundesliga_generateStatistigsTable_isCorrectForFirstThreeTeams() {
 		League league = new League();
 		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA));
 
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.getStatisticsTable();
+		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
 		assertThat(statisticsTable.get(new Team("Hertha BSC")).values()).containsExactly(14, 8, 12, 71, 65, 6, 50);
 		assertThat(statisticsTable.get(new Team("1. FC Köln")).values()).containsExactly(16, 6, 12, 70, 60, 10, 54);
@@ -175,7 +175,7 @@ public class LeagueTest {
 		League league = new League();
 		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA));
 
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.getStatisticsTable();
+		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
 		assertThat(new ArrayList<>(statisticsTable.keySet())).containsExactly(new Team("Sport-Club Freiburg"),
 				new Team("1. FC Köln"), new Team("Bayer 04 Leverkusen"), new Team("VfL Wolfsburg"),
@@ -184,5 +184,34 @@ public class LeagueTest {
 				new Team("VfL Bochum 1848"), new Team("FC Schalke 04"), new Team("SV Werder Bremen"),
 				new Team("FC Augsburg"), new Team("1. FSV Mainz 05"), new Team("FC Bayern München"),
 				new Team("Borussia Dortmund"), new Team("RB Leipzig"));
+	}
+
+	@Test
+	void finishedBundesliga_toString_formattingIsCorrect() {
+		League league = new League();
+		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA));
+
+		String result = league.toString();
+
+		assertThat(result).isEqualTo("  #                           Team   W   T   L   +   -   =   P\n"
+				+ "--------------------------------------------------------------\n"
+				+ "  1            Sport-Club Freiburg  20   5   9  76  69   7  65\n"
+				+ "  2                     1. FC Köln  16   6  12  70  60  10  54\n"
+				+ "  3            Bayer 04 Leverkusen  15   8  11  64  58   6  53\n"
+				+ "  4                  VfL Wolfsburg  15   7  12  69  57  12  52\n"
+				+ "  5                  VfB Stuttgart  15   6  13  54  48   6  51\n"
+				+ "  6       Borussia Mönchengladbach  14   8  10  65  47  18  50\n"
+				+ "  7                     Hertha BSC  14   8  12  71  65   6  50\n"
+				+ "  8            Eintracht Frankfurt  13   9  12  62  56   6  48\n"
+				+ "  9                 TSG Hoffenheim  12  11  11  64  64   0  47\n"
+				+ " 10             1. FC Union Berlin  12   9  13  55  68 -13  45\n"
+				+ " 11                VfL Bochum 1848  11   9  12  64  68  -4  42\n"
+				+ " 12                  FC Schalke 04  11   9  14  50  57  -7  42\n"
+				+ " 13               SV Werder Bremen  11   9  14  48  70 -22  42\n"
+				+ " 14                    FC Augsburg  10  11  13  50  49   1  41\n"
+				+ " 15                1. FSV Mainz 05  11   7  14  59  56   3  40\n"
+				+ " 16              FC Bayern München   9   9  14  61  69  -8  36\n"
+				+ " 17              Borussia Dortmund   9   9  16  56  65  -9  36\n"
+				+ " 18                     RB Leipzig   8  12  14  64  76 -12  36");
 	}
 }
