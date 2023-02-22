@@ -2,6 +2,16 @@
 
 ![Soccer Table Statistics Theme Image](https://code.frickelbude.ch/johannes_zeller/soccer-table/raw/branch/master/img/channels4_profile.jpg)
 
+## How to run...
+
+### ... on Windows
+
+set INPUT_FILES_LOCATION=C:/path/to/folder/containing/your/input/files set OUTPUT_FILES_LOCATION=C:/path/to/folder/later/containing/your/output/files&& java -jar SoccerTableStats.jar
+
+### ... on Linux
+
+env INPUT_FILES_LOCATION=~/path/to/folder/containing/your/input/files OUTPUT_FILES_LOCATION=~/path/to/folder/later/containing/your/output/files java -jar SoccerTableStats.jar
+
 ## Fragen und Annahmen
 
 - Gibt es auch Teams mit einem Doppelpunkt im Namen? -> Annahme nein
