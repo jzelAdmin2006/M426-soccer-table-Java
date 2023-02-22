@@ -10,9 +10,7 @@ If not done already, install JDK17:
 
 - Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 - choco install microsoft-openjdk17 17.0.6 -y
-
-
-
+<br />
 - cmd /c "set INPUT_FILES_LOCATION=C:/path/to/folder/containing/your/input/files&& set OUTPUT_FILES_LOCATION=C:/path/to/folder/later/containing/your/output/files&& java -jar SoccerTableStats.jar"
 
 ### ... on Linux
@@ -20,7 +18,7 @@ If not done already, install JDK17:
 If not done already, install JDK17:
 
 - sudo apt install openjdk-17-jdk openjdk-17-jre
-
+<br />
 - env INPUT_FILES_LOCATION=~/path/to/folder/containing/your/input/files OUTPUT_FILES_LOCATION=~/path/to/folder/later/containing/your/output/files java -jar SoccerTableStats.jar
 
 ## Fragen und Annahmen
