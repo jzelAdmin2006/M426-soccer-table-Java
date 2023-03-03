@@ -11,8 +11,8 @@
   9                 TSG Hoffenheim  12  11  11  64  64   0  47
  10             1. FC Union Berlin  12   9  13  55  68 -13  45
  11                VfL Bochum 1848  11   9  12  64  68  -4  42
- 12               SV Werder Bremen  11   9  14  48  70 -22  42
- 13                  FC Schalke 04  11   9  14  50  57  -7  42
+ 12                  FC Schalke 04  11   9  14  50  57  -7  42
+ 13               SV Werder Bremen  11   9  14  48  70 -22  42
  14                    FC Augsburg  10  11  13  50  49   1  41
  15                1. FSV Mainz 05  11   7  14  59  56   3  40
  16              FC Bayern München   9   9  14  61  69  -8  36
