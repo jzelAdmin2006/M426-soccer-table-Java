@@ -15,7 +15,7 @@
 - **Kann davon ausgegangen werden, dass die Anzahl Tore immer ohne Abstand zum Doppelpunkt sind.**
     - Ja, das Format wurde so festgelegt.
 - **Ist die Annahme richtig, dass bei einer Gleichen Punkteanzahl als erstes auf die Anzahl verlorene Spiele geschaut wird?**
-    - Nein; die Sortierreihenfolge lautet: (TODO: abschliessend klären)
+    - Nein; die Sortierreihenfolge lautet:
         1. Punkte (absteigend)
         2. Tordifferenz (absteigend)
         3. Anzahl Siege (absteigend)
@@ -31,7 +31,7 @@
 - **Wie werden im Fussball die Spielergebnisse ausgewertet, wie werden die Punkte gezählt?**
     - Ein Sieg ergibt drei Punkt, ein Unentschieden einen Punkt (für beide Mannschaften), eine Niederlage null Punkte.
 - **Was passiert, wenn zwei Mannschaften die gleiche Punktzahl haben?**
-    - Es wird nach Tordifferenz und Anzahl Siegen weitersortiert. TODO
+    - Es wird nach Tordifferenz und Anzahl Siegen weitersortiert.
 - **Gibt es besondere Anforderungen an die Formatierung oder Ausgabe der Programmergebnisse?**
     - Die Ausgabe soll in eine Textdatei erfolgen (UTF-8-kodiert).
     - Alle Spalten sind rechtsbündig auszurichten.
@@ -161,10 +161,13 @@
 
 **Fragliche und falsche Annahmen**
 
-TODO: Sortierreihenfolge abschliessend klären
-
 - Muss erweiterbar sein 
+    - Das gestellte Problem muss gelöst werden!
 - Sortierreihenfolge: Punkte > Tordifferenz > Tore geschossen
+    - Punkte > Tordifferenz > **Anzahl Siege**
 - Das Projekt kann sehr lange gehen 
-- Das Projekt könnte einige Zeit in anspruch nehmen.
+    - Ende Semester sollte es fertig sein
+- Das Projekt könnte einige Zeit in Anspruch nehmen.
+    - Ja, wir haben dafür bis Ende Semester Zeit
 - Es könnte sehr spannend werden.
+    - Durchaus :-)
