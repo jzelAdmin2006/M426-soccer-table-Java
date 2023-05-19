@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.structure;
+package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
 public enum StatisticsTableColumn {
 	WINS, TIES, LOSSES, GOALS, COUNTERGOALS, GOALDIFFERENCE, POINTS;

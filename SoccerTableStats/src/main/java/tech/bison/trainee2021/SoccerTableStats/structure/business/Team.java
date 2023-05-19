@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.structure;
+package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
 import java.util.Objects;
 
