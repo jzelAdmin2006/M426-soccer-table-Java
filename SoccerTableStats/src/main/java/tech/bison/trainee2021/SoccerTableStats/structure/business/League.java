@@ -21,8 +21,7 @@ public class League {
   private static final int TIE_POINTS = 1;
   private final List<GameResult> gameResults = new ArrayList<>();
 
-  @Override
-  public String toString() {
+  public String toFormattedTable() {
     Map<Team, Map<StatisticsTableColumn, Integer>> statsTable = generateStatisticsTable();
     int numOfTeamsDecPlaces = String.valueOf(statsTable.size()).length();
     int longestTeamNamePlaces = findTeamWithLongestName(statsTable).getName().length();

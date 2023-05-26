@@ -338,11 +338,11 @@ public class LeagueTest {
   }
 
   @Test
-  void finishedBundesliga_toString_formattingIsCorrect() {
+  void finishedBundesliga_toFormattedTable_formattingIsCorrect() {
     League league = new League();
     league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA));
 
-    String result = league.toString();
+    String result = league.toFormattedTable();
 
     assertThat(result).isEqualTo("  #                           Team   W   T   L   +   -   =   P\n"
         + "--------------------------------------------------------------\n"
