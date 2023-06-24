@@ -32,7 +32,9 @@ public class SoccerTableStats {
 		for (File file : inputFiles) {
 			try {
 				League league = new League();
-				league.addGameResults(GameResult.parseGameResults(Files.readString(Path.of(file.getAbsolutePath()))));
+				Path path = Path.of(file.getAbsolutePath());
+				league.addGameResults(GameResult.parseGameResults(Files.readString(path),
+						InputFormat.fromFileName(path.getFileName().toString())));
 				FileOutputStream outputStream = new FileOutputStream(
 						Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString());
 				outputStream.write(league.toFormattedTable().getBytes());
