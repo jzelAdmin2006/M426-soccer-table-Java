@@ -14,6 +14,7 @@ import tech.bison.trainee2021.SoccerTableStats.structure.business.League;
 public class SoccerTableStats {
 	private static final String INPUT_FILES_LOCATION = validateGetEnv("INPUT_FILES_LOCATION");
 	private static final String OUTPUT_FILES_LOCATION = validateGetEnv("OUTPUT_FILES_LOCATION");
+	public static final String SOCCER_TABLE_STATS_FILE_EXTENSION = ".scrts";
 
 	public static void main(String[] args) {
 		new SoccerTableStats().writeOutputByInput();
@@ -36,7 +37,8 @@ public class SoccerTableStats {
 				league.addGameResults(GameResult.parseGameResults(Files.readString(path),
 						InputFormat.fromFileName(path.getFileName().toString())));
 				FileOutputStream outputStream = new FileOutputStream(
-						Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString());
+						Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString()
+								+ SOCCER_TABLE_STATS_FILE_EXTENSION);
 				outputStream.write(league.toFormattedTable().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
