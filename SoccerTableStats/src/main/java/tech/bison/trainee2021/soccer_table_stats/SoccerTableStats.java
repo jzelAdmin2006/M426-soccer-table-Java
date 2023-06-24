@@ -23,16 +23,14 @@ public class SoccerTableStats {
 	private void writeOutputByInput() {
 		File[] inputFiles = new File(INPUT_FILES_LOCATION).listFiles();
 		for (File file : inputFiles) {
-			try {
+			try (FileOutputStream outputStream = new FileOutputStream(
+					Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString()
+							+ SOCCER_TABLE_STATS_FILE_EXTENSION)) {
 				League league = new League();
 				Path path = Path.of(file.getAbsolutePath());
 				league.addGameResults(parseGameResults(Files.readString(path),
 						InputFormat.fromFileName(path.getFileName().toString())));
-				FileOutputStream outputStream = new FileOutputStream(
-						Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString()
-								+ SOCCER_TABLE_STATS_FILE_EXTENSION);
 				outputStream.write(league.toFormattedTable().getBytes());
-				outputStream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
