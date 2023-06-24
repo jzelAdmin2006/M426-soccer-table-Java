@@ -1,9 +1,9 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResult;
 import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
+import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import tech.bison.trainee2021.SoccerTableStats.InputFormat;
-import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;
+import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;;
 
 public class GameResultTest {
 	@Test
@@ -87,10 +87,10 @@ public class GameResultTest {
 			List<Integer> expectedAwayTeamScores, String parsingDesignation) {
 		List<GameResult> gameResults = parseGameResults(gameResultsString, inputFormat);
 
-		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(toList());
-		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(toList());
-		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore).collect(toList());
-		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore).collect(toList());
+		List<Team> homeTeamResults = mapToList(gameResults, GameResult::getHomeTeam);
+		List<Team> awayTeamResults = mapToList(gameResults, GameResult::getAwayTeam);
+		List<Integer> homeTeamScoreResults = mapToList(gameResults, GameResult::getHomeTeamScore);
+		List<Integer> awayTeamScoreResults = mapToList(gameResults, GameResult::getAwayTeamScore);
 
 		assertThat(homeTeamResults).containsExactlyElementsOf(expectedHomeTeams);
 		assertThat(awayTeamResults).containsExactlyElementsOf(expectedAwayTeams);

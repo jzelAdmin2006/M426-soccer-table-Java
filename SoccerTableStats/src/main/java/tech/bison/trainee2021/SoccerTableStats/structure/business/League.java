@@ -6,8 +6,8 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
+import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Map.Entry;;
 
 public class League {
 	private static final String TEAM_DESIGNATION = "Team";
@@ -77,7 +77,7 @@ public class League {
 	private int findLargestValueAmountInTable(Map<Team, Map<StatisticsTableColumn, Integer>> statsTable) {
 		int largestValueAmount = 0;
 		for (Map<StatisticsTableColumn, Integer> teamStat : statsTable.values()) {
-			for (int amount : teamStat.values().stream().map(Math::abs).collect(toList())) {
+			for (int amount : mapToList(teamStat.values(), Math::abs)) {
 				if (amount > largestValueAmount) {
 					largestValueAmount = amount;
 				}

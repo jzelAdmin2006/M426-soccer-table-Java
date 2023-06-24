@@ -6,6 +6,7 @@ import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
+import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class GameResult {
 		Type gameResultListType = new TypeToken<List<GameResultDto>>() {
 		}.getType();
 		List<GameResultDto> dtos = new Gson().fromJson(element, gameResultListType);
-		return dtos.stream().map(new MapperService()::fromDto).toList();
+		return mapToList(dtos, new MapperService()::fromDto);
 	}
 
 	private static GameResult parseFromJsonObject(JsonElement element) {
