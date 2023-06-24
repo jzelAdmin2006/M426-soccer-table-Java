@@ -20,14 +20,6 @@ public class SoccerTableStats {
 		new SoccerTableStats().writeOutputByInput();
 	}
 
-	private static String validateGetEnv(String variable) throws EnvironmentVariableNotSetException {
-		String value = getenv(variable);
-		if (value == null) {
-			throw new EnvironmentVariableNotSetException(variable);
-		}
-		return value;
-	}
-
 	private void writeOutputByInput() {
 		File[] inputFiles = new File(INPUT_FILES_LOCATION).listFiles();
 		for (File file : inputFiles) {
@@ -46,4 +38,13 @@ public class SoccerTableStats {
 			}
 		}
 	}
+
+	private static String validateGetEnv(String variable) throws EnvironmentVariableNotSetException {
+		String value = getenv(variable);
+		if (value == null) {
+			throw new EnvironmentVariableNotSetException(variable);
+		}
+		return value;
+	}
+
 }

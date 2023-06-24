@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class InputFormatTest {
+
 	@ParameterizedTest(name = "{2}FileExtension_fromFileName_is{1}")
 	@MethodSource("provideValuesForInputFormat")
 	void fileWithExtension_fromFileName_isCorrect(String fileName, InputFormat expected, String inputName) {
@@ -28,4 +29,5 @@ public class InputFormatTest {
 								.filter(s -> !s.equalsIgnoreCase("json")).findFirst().orElse("asdfqwert"),
 						InputFormat.TEXT, "random"));
 	}
+
 }

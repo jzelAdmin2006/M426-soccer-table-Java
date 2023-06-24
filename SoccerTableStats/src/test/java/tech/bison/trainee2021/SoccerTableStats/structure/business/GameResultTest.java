@@ -21,6 +21,7 @@ import tech.bison.trainee2021.SoccerTableStats.InputFormat;
 import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;;
 
 public class GameResultTest {
+
 	@Test
 	void newGameResultWithTeamsAndScores_getTeamsAndScores_isCorrect() {
 		GameResult gameResult = new GameResult(new Team("HomeTeam"), new Team("AwayTeam"), 0, 1);
@@ -172,4 +173,5 @@ public class GameResultTest {
 				new GameResultDto("FC Schaffhausen", "FC Winterthur", 0, 0),
 				new GameResultDto("FC Thun", "FC Winterthur", 3, 1));
 	}
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class StreamUtilsTest {
+
 	@Test
 	void collectionOfNumbers_doubleEachWithMapToList_isCorrect() {
 		Collection<Integer> numbers = List.of(1, 2, 3, 4, 5);
@@ -26,4 +27,5 @@ public class StreamUtilsTest {
 
 		assertThat(result).containsExactly("foo", "bar", "foobar", "ahdfasdfbdfafdaaqwerttz834t");
 	}
+
 }

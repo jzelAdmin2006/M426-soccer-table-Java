@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 public class TeamTest {
+
 	@Test
 	void newClubWithName_getName_isTheSame() {
 		Team club = new Team("Name");
@@ -22,4 +23,5 @@ public class TeamTest {
 
 		assertThat(result).isEqualTo("Name2");
 	}
+
 }

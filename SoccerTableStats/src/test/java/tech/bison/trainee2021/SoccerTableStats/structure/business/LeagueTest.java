@@ -385,4 +385,5 @@ public class LeagueTest {
 				new Team("SV Werder Bremen"), new Team("TSG Hoffenheim"), new Team("VfB Stuttgart"),
 				new Team("VfL Bochum 1848"), new Team("VfL Wolfsburg"));
 	}
+
 }
