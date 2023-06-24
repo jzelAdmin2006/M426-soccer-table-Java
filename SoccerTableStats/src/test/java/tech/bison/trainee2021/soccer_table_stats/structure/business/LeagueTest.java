@@ -1,14 +1,14 @@
-package tech.bison.trainee2021.SoccerTableStats.structure.business;
+package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
+import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResults;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import tech.bison.trainee2021.SoccerTableStats.InputFormat;
+import tech.bison.trainee2021.soccer_table_stats.InputFormat;
 
 class LeagueTest {
 	private static final String TEST_BUNDESLIGA = "Hertha BSC 4:3 1. FC Küln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n"

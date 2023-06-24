@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats;
+package tech.bison.trainee2021.soccer_table_stats;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.assertj.core.api.Assertions.assertThat;

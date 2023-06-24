@@ -1,7 +1,7 @@
-package tech.bison.trainee2021.SoccerTableStats;
+package tech.bison.trainee2021.soccer_table_stats;
 
 import static java.lang.System.getenv;
-import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
+import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResults;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import tech.bison.trainee2021.SoccerTableStats.structure.business.League;
+import tech.bison.trainee2021.soccer_table_stats.structure.business.League;
 
 public class SoccerTableStats {
 	private static final String INPUT_FILES_LOCATION = validateGetEnv("INPUT_FILES_LOCATION");

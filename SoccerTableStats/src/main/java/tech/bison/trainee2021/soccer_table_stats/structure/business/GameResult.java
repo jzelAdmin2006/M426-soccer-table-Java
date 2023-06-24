@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.structure.business;
+package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static com.google.gson.JsonParser.parseString;
 import static java.lang.Integer.parseInt;
@@ -6,7 +6,7 @@ import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
-import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
+import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
-import tech.bison.trainee2021.SoccerTableStats.InputFormat;
-import tech.bison.trainee2021.SoccerTableStats.service.MapperService;
-import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;
+import tech.bison.trainee2021.soccer_table_stats.InputFormat;
+import tech.bison.trainee2021.soccer_table_stats.service.MapperService;
+import tech.bison.trainee2021.soccer_table_stats.structure.data.GameResultDto;
 
 public class GameResult {
 

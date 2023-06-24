@@ -1,7 +1,7 @@
-package tech.bison.trainee2021.SoccerTableStats.util;
+package tech.bison.trainee2021.soccer_table_stats.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
+import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
 
 import java.util.Collection;
 import java.util.List;

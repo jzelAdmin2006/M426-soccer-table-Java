@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.structure.data;
+package tech.bison.trainee2021.soccer_table_stats.structure.data;
 
 import static java.util.Objects.hash;
 

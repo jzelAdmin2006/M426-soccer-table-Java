@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.util;
+package tech.bison.trainee2021.soccer_table_stats.util;
 
 import java.util.Collection;
 import java.util.List;

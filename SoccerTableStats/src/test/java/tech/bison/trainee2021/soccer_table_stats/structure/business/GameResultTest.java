@@ -1,9 +1,9 @@
-package tech.bison.trainee2021.SoccerTableStats.structure.business;
+package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResult;
-import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
-import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
+import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResult;
+import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResults;
+import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import tech.bison.trainee2021.SoccerTableStats.InputFormat;
-import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;;
+import tech.bison.trainee2021.soccer_table_stats.InputFormat;
+import tech.bison.trainee2021.soccer_table_stats.structure.data.GameResultDto;;
 
 class GameResultTest {
 

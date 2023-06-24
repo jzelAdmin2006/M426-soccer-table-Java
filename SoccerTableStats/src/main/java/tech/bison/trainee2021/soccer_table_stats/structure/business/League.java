@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats.structure.business;
+package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
@@ -7,7 +7,7 @@ import static java.util.Comparator.reverseOrder;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
-import static tech.bison.trainee2021.SoccerTableStats.util.StreamUtils.mapToList;
+import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package tech.bison.trainee2021.SoccerTableStats;
+package tech.bison.trainee2021.soccer_table_stats;
 
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
