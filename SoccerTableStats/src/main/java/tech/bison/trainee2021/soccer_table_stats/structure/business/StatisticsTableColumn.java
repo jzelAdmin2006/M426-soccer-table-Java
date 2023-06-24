@@ -26,4 +26,4 @@ public enum StatisticsTableColumn {
 		throw new UnsupportedOperationException(
 				format("The designation of the column \"%s\" isn't implemented.", this));
 	}
-};
+}
