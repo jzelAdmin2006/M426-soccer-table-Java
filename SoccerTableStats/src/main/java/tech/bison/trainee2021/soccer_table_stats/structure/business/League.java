@@ -143,8 +143,7 @@ public class League {
 
 	private void initializeTeamStatistics(Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable, Team team) {
 		if (statisticsTable.get(team) == null) {
-			EnumMap<StatisticsTableColumn, Integer> initialTeamStatistics = new EnumMap<StatisticsTableColumn, Integer>(
-					StatisticsTableColumn.class);
+			EnumMap<StatisticsTableColumn, Integer> initialTeamStatistics = new EnumMap<>(StatisticsTableColumn.class);
 			for (StatisticsTableColumn statisticsTableColumn : StatisticsTableColumn.values()) {
 				initialTeamStatistics.put(statisticsTableColumn, 0);
 			}
