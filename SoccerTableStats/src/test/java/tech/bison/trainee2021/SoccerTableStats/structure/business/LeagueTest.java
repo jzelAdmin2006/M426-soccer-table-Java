@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import tech.bison.trainee2021.SoccerTableStats.InputFormat;
 
-public class LeagueTest {
+class LeagueTest {
 	private static final String TEST_BUNDESLIGA = "Hertha BSC 4:3 1. FC Küln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n"
 			+ "FC Schalke 04 2:2 TSG Hoffenheim\n" + "Borussia Münchengladbach 0:2 Sport-Club Freiburg\n"
 			+ "RB Leipzig 0:4 1. FSV Mainz 05\n" + "SV Werder Bremen 0:2 VfB Stuttgart\n"

@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import tech.bison.trainee2021.SoccerTableStats.InputFormat;
 import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;;
 
-public class GameResultTest {
+class GameResultTest {
 
 	@Test
 	void newGameResultWithTeamsAndScores_getTeamsAndScores_isCorrect() {

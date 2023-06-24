@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class StreamUtilsTest {
+class StreamUtilsTest {
 
 	@Test
 	void collectionOfNumbers_doubleEachWithMapToList_isCorrect() {

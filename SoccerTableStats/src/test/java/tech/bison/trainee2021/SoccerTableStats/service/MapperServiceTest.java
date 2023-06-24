@@ -8,7 +8,7 @@ import tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult;
 import tech.bison.trainee2021.SoccerTableStats.structure.business.Team;
 import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;
 
-public class MapperServiceTest {
+class MapperServiceTest {
 	@Test
 	void newGameResultDto_fromDto_isCorrect() {
 		GameResultDto gameResult = new GameResultDto("asdf", "qwert", 5, 8);

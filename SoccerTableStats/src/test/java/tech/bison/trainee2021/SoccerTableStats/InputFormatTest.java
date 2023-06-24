@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class InputFormatTest {
+class InputFormatTest {
 
 	@ParameterizedTest(name = "{2}FileExtension_fromFileName_is{1}")
 	@MethodSource("provideValuesForInputFormat")
