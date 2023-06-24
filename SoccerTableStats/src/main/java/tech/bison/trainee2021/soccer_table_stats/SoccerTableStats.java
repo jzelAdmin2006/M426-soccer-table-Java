@@ -14,10 +14,10 @@ import java.util.logging.Logger;
 import tech.bison.trainee2021.soccer_table_stats.structure.business.League;
 
 public class SoccerTableStats {
+	public static final String SOCCER_TABLE_STATS_FILE_EXTENSION = ".scrts";
 	private static final String INPUT_FILES_LOCATION = validateGetEnv("INPUT_FILES_LOCATION");
 	private static final String OUTPUT_FILES_LOCATION = validateGetEnv("OUTPUT_FILES_LOCATION");
 	private static final Logger LOGGER = Logger.getLogger(SoccerTableStats.class.getName());
-	public static final String SOCCER_TABLE_STATS_FILE_EXTENSION = ".scrts";
 
 	public static void main(String[] args) {
 		new SoccerTableStats().writeOutputByInput();
