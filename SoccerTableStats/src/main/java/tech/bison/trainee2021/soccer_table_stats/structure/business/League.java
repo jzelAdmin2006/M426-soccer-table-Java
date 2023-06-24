@@ -38,7 +38,7 @@ public class League {
 				toSpaces(spacesBetweenRankAndGrid - TEAM_DESIGNATION.length()), TEAM_DESIGNATION,
 				toSpaces(spacesBetweenColumns), columnLabels);
 		String secondLine = "-".repeat(firstLine.length());
-		return format("%s\n%s\n%s", firstLine, secondLine,
+		return format("%s%n%s%n%s", firstLine, secondLine,
 				buildTableContent(statsTable, numOfTeamsDecPlaces, spacesBetweenRankAndGrid, spacesBetweenColumns));
 	}
 
@@ -67,7 +67,7 @@ public class League {
 			gridRow.append(toSpaces(spacesBetweenColumns + 1 - String.valueOf(gridRowValue).length()))
 					.append(gridRowValue);
 		}
-		tableContent.append(format("%s%s%s%s%s\n", spaceBefore, counter, spaceBetweenRankAndTeam, teamName, gridRow));
+		tableContent.append(format("%s%s%s%s%s%n", spaceBefore, counter, spaceBetweenRankAndTeam, teamName, gridRow));
 	}
 
 	private String toSpaces(int numberOfSpaces) {
