@@ -33,7 +33,7 @@ public class GameResultTest {
 	}
 
 	@Test
-	void newGameResultWitDifferenthTeamsAndScores_getTeamsAndScores_isCorrect() {
+	void newGameResultWitDifferentTeamsAndScores_getTeamsAndScores_isCorrect() {
 		GameResult gameResult = new GameResult(new Team("HomeTeam2"), new Team("AwayTeam2"), 1, 2);
 
 		Team homeTeamResult = gameResult.getHomeTeam();
