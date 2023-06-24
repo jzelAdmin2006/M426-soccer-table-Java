@@ -2,7 +2,7 @@
 
 ![Soccer Table Statistics Theme Image](https://code.frickelbude.ch/johannes_zeller/soccer-table/raw/branch/master/img/channels4_profile.jpg)
 
-## How to run...
+## How to run Jar (see releases)...
 
 ### ... on Windows
 
