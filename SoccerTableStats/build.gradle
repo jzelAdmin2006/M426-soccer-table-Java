@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-  mainClassName = 'tech.bison.trainee2021.SoccerTableStats.SoccerTableStats'
+  mainClassName = 'tech.bison.trainee2021.soccer_table_stats.SoccerTableStats'
 }
 
 repositories {
@@ -37,7 +37,7 @@ wrapper {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'tech.bison.trainee2021.SoccerTableStats.SoccerTableStats'
+        attributes 'Main-Class': 'tech.bison.trainee2021.soccer_table_stats.SoccerTableStats'
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from {
