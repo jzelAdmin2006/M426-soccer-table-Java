@@ -87,9 +87,9 @@ public class League {
 	}
 
 	private Team findTeamWithLongestName(Map<Team, Map<StatisticsTableColumn, Integer>> statsTable) {
-		Team teamWithLongestName = null;
+		Team teamWithLongestName = new Team("");
 		for (Team team : statsTable.keySet()) {
-			if (teamWithLongestName == null || team.getName().length() > teamWithLongestName.getName().length()) {
+			if (team.getName().length() > teamWithLongestName.getName().length()) {
 				teamWithLongestName = team;
 			}
 		}
