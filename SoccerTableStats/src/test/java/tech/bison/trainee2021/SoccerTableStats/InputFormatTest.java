@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class InputFormatTest {
 	@ParameterizedTest(name = "{2}FileExtension_fromFileName_is{1}")
 	@MethodSource("provideValuesForInputFormat")
-	void jsonFileExtension_fromFileName_isJson(String fileName, InputFormat expected, String inputName) {
+	void fileWithExtension_fromFileName_isCorrect(String fileName, InputFormat expected, String inputName) {
 		InputFormat result = InputFormat.fromFileName(fileName);
 
 		assertThat(result).isEqualTo(expected);
