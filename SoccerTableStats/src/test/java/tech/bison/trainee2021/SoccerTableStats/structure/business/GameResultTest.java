@@ -7,8 +7,12 @@ import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameRes
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,34 +51,33 @@ public class GameResultTest {
 		assertThat(awayTeamScoreResult).isEqualTo(2);
 	}
 
-	@Test
-	void gameResultText_parseGameResult_isCorrect() {
-		GameResult gameResult = parseGameResult("Hertha BSC 4:3 1. FC Köln", InputFormat.TEXT);
+	@ParameterizedTest(name = "gameResult{1}_{6}GameResult_isCorrect")
+	@MethodSource("provideValuesForParsingSingleGameResult")
+	void gameResultString_parseGameResult_isCorrect(String gameResultString, InputFormat inputFormat,
+			Team expectedHomeTeam, Team expectedAwayTeam, int expectedHomeTeamScore, int expectedAwayTeamScore,
+			String parsingDesignation) {
+		GameResult gameResult = parseGameResult(gameResultString, inputFormat);
 
 		Team homeTeamResult = gameResult.getHomeTeam();
 		Team awayTeamResult = gameResult.getAwayTeam();
 		int homeTeamScoreResult = gameResult.getHomeTeamScore();
 		int awayTeamScoreResult = gameResult.getAwayTeamScore();
 
-		assertThat(homeTeamResult).isEqualTo(new Team("Hertha BSC"));
-		assertThat(awayTeamResult).isEqualTo(new Team("1. FC Köln"));
-		assertThat(homeTeamScoreResult).isEqualTo(4);
-		assertThat(awayTeamScoreResult).isEqualTo(3);
+		assertThat(homeTeamResult).isEqualTo(expectedHomeTeam);
+		assertThat(awayTeamResult).isEqualTo(expectedAwayTeam);
+		assertThat(homeTeamScoreResult).isEqualTo(expectedHomeTeamScore);
+		assertThat(awayTeamScoreResult).isEqualTo(expectedAwayTeamScore);
 	}
 
-	@Test
-	void gameResultText_parseDifferentGameResult_isCorrect() {
-		GameResult gameResult = parseGameResult("VfL Wolfsburg 2:1 FC Augsburg", InputFormat.TEXT);
-
-		Team homeTeamResult = gameResult.getHomeTeam();
-		Team awayTeamResult = gameResult.getAwayTeam();
-		int homeTeamScoreResult = gameResult.getHomeTeamScore();
-		int awayTeamScoreResult = gameResult.getAwayTeamScore();
-
-		assertThat(homeTeamResult).isEqualTo(new Team("VfL Wolfsburg"));
-		assertThat(awayTeamResult).isEqualTo(new Team("FC Augsburg"));
-		assertThat(homeTeamScoreResult).isEqualTo(2);
-		assertThat(awayTeamScoreResult).isEqualTo(1);
+	private static Stream<Arguments> provideValuesForParsingSingleGameResult() {
+		return Stream.of(
+				Arguments.of("Hertha BSC 4:3 1. FC Köln", InputFormat.TEXT, new Team("Hertha BSC"),
+						new Team("1. FC Köln"), 4, 3, "parse"),
+				Arguments.of("VfL Wolfsburg 2:1 FC Augsburg", InputFormat.TEXT, new Team("VfL Wolfsburg"),
+						new Team("FC Augsburg"), 2, 1, "parseDifferent"),
+				Arguments.of(
+						"{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3}",
+						InputFormat.JSON, new Team("Hertha BSC"), new Team("1. FC Köln"), 4, 3, "automaticallyParse"));
 	}
 
 	@Test
@@ -154,24 +157,7 @@ public class GameResultTest {
 	}
 
 	@Test
-	void gameResultJson_automaticallyParseGameResult_isCorrect() {
-		GameResult gameResult = parseGameResult(
-				"{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3}",
-				InputFormat.JSON);
-
-		Team homeTeamResult = gameResult.getHomeTeam();
-		Team awayTeamResult = gameResult.getAwayTeam();
-		int homeTeamScoreResult = gameResult.getHomeTeamScore();
-		int awayTeamScoreResult = gameResult.getAwayTeamScore();
-
-		assertThat(homeTeamResult).isEqualTo(new Team("Hertha BSC"));
-		assertThat(awayTeamResult).isEqualTo(new Team("1. FC Köln"));
-		assertThat(homeTeamScoreResult).isEqualTo(4);
-		assertThat(awayTeamScoreResult).isEqualTo(3);
-	}
-
-	@Test
-	void gameResultsText_automaticallyParseGameResults_isCorrect() {
+	void gameResultsJson_automaticallyParseGameResults_isCorrect() {
 		List<GameResult> gameResults = parseGameResults(
 				"[{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3},"
 						+ "{\"homeTeam\":\"VfL Wolfsburg\",\"awayTeam\":\"FC Augsburg\",\"homeGoals\":2,\"awayGoals\":1},"
