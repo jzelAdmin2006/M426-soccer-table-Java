@@ -9,15 +9,15 @@ import tech.bison.trainee2021.SoccerTableStats.structure.business.Team;
 import tech.bison.trainee2021.SoccerTableStats.structure.data.GameResultDto;
 
 public class MapperServiceTest {
-  @Test
-  void newGameResultDto_fromDto_isCorrect() {
-    GameResultDto gameResult = new GameResultDto("asdf", "qwert", 5, 8);
+	@Test
+	void newGameResultDto_fromDto_isCorrect() {
+		GameResultDto gameResult = new GameResultDto("asdf", "qwert", 5, 8);
 
-    GameResult result = new MapperService().fromDto(gameResult);
+		GameResult result = new MapperService().fromDto(gameResult);
 
-    assertThat(result.getHomeTeam()).isEqualTo(new Team("asdf"));
-    assertThat(result.getAwayTeam()).isEqualTo(new Team("qwert"));
-    assertThat(result.getHomeTeamScore()).isEqualTo(5);
-    assertThat(result.getAwayTeamScore()).isEqualTo(8);
-  }
+		assertThat(result.getHomeTeam()).isEqualTo(new Team("asdf"));
+		assertThat(result.getAwayTeam()).isEqualTo(new Team("qwert"));
+		assertThat(result.getHomeTeamScore()).isEqualTo(5);
+		assertThat(result.getAwayTeamScore()).isEqualTo(8);
+	}
 }

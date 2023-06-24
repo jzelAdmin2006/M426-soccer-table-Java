@@ -1,5 +1,7 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
+import static java.util.Objects.hash;
+
 import java.util.Objects;
 
 public class Team {
@@ -16,7 +18,7 @@ public class Team {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name);
+		return hash(name);
 	}
 
 	@Override

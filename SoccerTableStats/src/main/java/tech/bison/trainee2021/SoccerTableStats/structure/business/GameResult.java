@@ -1,15 +1,19 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
+import static com.google.gson.JsonParser.parseString;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
+import static java.util.Collections.singletonList;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import tech.bison.trainee2021.SoccerTableStats.InputFormat;
@@ -54,7 +58,7 @@ public class GameResult {
 			return parseFromText(gameResultsToParse);
 		}
 		throw new UnsupportedOperationException(
-				String.format("The game result parsing for the input format \"%s\" isn't implemented.", inputFormat));
+				format("The game result parsing for the input format \"%s\" isn't implemented.", inputFormat));
 	}
 
 	public static GameResult parseGameResult(String gameResult, InputFormat inputFormat) {
@@ -62,22 +66,21 @@ public class GameResult {
 	}
 
 	private static List<GameResult> parseFromText(String gameResultsToParse) {
-		Matcher matcher = Pattern.compile("^(.*?)\\s(\\d+):(\\d+)\\s(.*)$", Pattern.MULTILINE)
-				.matcher(gameResultsToParse);
+		Matcher matcher = compile("^(.*?)\\s(\\d+):(\\d+)\\s(.*)$", MULTILINE).matcher(gameResultsToParse);
 		List<GameResult> gameResults = new ArrayList<>();
 		while (matcher.find()) {
 			gameResults.add(new GameResult(new Team(matcher.group(1)), new Team(matcher.group(4)),
-					Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3))));
+					parseInt(matcher.group(2)), parseInt(matcher.group(3))));
 		}
 		return gameResults;
 	}
 
-	private static List<GameResult> parseFromJson(String gameResultsToParse) {
-		JsonElement element = JsonParser.parseString(gameResultsToParse);
+	private static List<GameResult> parseFromJson(String json) {
+		JsonElement element = parseString(json);
 		if (element.isJsonArray()) {
 			return parseFromJsonArray(element);
 		} else {
-			return Collections.singletonList(parseFromJsonObject(element));
+			return singletonList(parseFromJsonObject(element));
 		}
 	}
 

@@ -1,10 +1,12 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResult;
+import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +49,7 @@ public class GameResultTest {
 
 	@Test
 	void gameResultText_parseGameResult_isCorrect() {
-		GameResult gameResult = GameResult.parseGameResult("Hertha BSC 4:3 1. FC Köln", InputFormat.TEXT);
+		GameResult gameResult = parseGameResult("Hertha BSC 4:3 1. FC Köln", InputFormat.TEXT);
 
 		Team homeTeamResult = gameResult.getHomeTeam();
 		Team awayTeamResult = gameResult.getAwayTeam();
@@ -62,7 +64,7 @@ public class GameResultTest {
 
 	@Test
 	void gameResultText_parseDifferentGameResult_isCorrect() {
-		GameResult gameResult = GameResult.parseGameResult("VfL Wolfsburg 2:1 FC Augsburg", InputFormat.TEXT);
+		GameResult gameResult = parseGameResult("VfL Wolfsburg 2:1 FC Augsburg", InputFormat.TEXT);
 
 		Team homeTeamResult = gameResult.getHomeTeam();
 		Team awayTeamResult = gameResult.getAwayTeam();
@@ -77,18 +79,16 @@ public class GameResultTest {
 
 	@Test
 	void gameResultsText_parseGameResults_isCorrect() {
-		List<GameResult> gameResults = GameResult.parseGameResults(
+		List<GameResult> gameResults = parseGameResults(
 				"Hertha BSC 4:3 1. FC Köln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n" + "FC Schalke 04 2:2 TSG Hoffenheim\n"
 						+ "Borussia Mönchengladbach 0:2 Sport-Club Freiburg\n" + "RB Leipzig 0:4 1. FSV Mainz 05\n"
 						+ "SV Werder Bremen 0:2 VfB Stuttgart\n" + "Borussia Dortmund 3:2 Eintracht Frankfurt",
 				InputFormat.TEXT);
 
-		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(Collectors.toList());
-		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(Collectors.toList());
-		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore)
-				.collect(Collectors.toList());
-		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore)
-				.collect(Collectors.toList());
+		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(toList());
+		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(toList());
+		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore).collect(toList());
+		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore).collect(toList());
 
 		assertThat(homeTeamResults).containsExactly(new Team("Hertha BSC"), new Team("VfL Wolfsburg"),
 				new Team("FC Schalke 04"), new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),
@@ -107,12 +107,10 @@ public class GameResultTest {
 						+ "FC Schalke 04 2:2 TSG Hoffenheim\n" + "Borussia Mönchengladbach 0:2 Sport-Club Freiburg\n"
 						+ "RB Leipzig 0:4 1. FSV Mainz 05\n" + "SV Werder Bremen 0:2 VfB Stuttgart", InputFormat.TEXT);
 
-		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(Collectors.toList());
-		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(Collectors.toList());
-		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore)
-				.collect(Collectors.toList());
-		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore)
-				.collect(Collectors.toList());
+		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(toList());
+		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(toList());
+		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore).collect(toList());
+		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore).collect(toList());
 
 		assertThat(homeTeamResults).containsExactly(new Team("Hertha BSC"), new Team("VfL Wolfsburg"),
 				new Team("FC Schalke 04"), new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),
@@ -157,7 +155,7 @@ public class GameResultTest {
 
 	@Test
 	void gameResultJson_automaticallyParseGameResult_isCorrect() {
-		GameResult gameResult = GameResult.parseGameResult(
+		GameResult gameResult = parseGameResult(
 				"{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3}",
 				InputFormat.JSON);
 
@@ -174,7 +172,7 @@ public class GameResultTest {
 
 	@Test
 	void gameResultsText_automaticallyParseGameResults_isCorrect() {
-		List<GameResult> gameResults = GameResult.parseGameResults(
+		List<GameResult> gameResults = parseGameResults(
 				"[{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3},"
 						+ "{\"homeTeam\":\"VfL Wolfsburg\",\"awayTeam\":\"FC Augsburg\",\"homeGoals\":2,\"awayGoals\":1},"
 						+ "{\"homeTeam\":\"FC Schalke 04\",\"awayTeam\":\"TSG Hoffenheim\",\"homeGoals\":2,\"awayGoals\":2},"
@@ -184,12 +182,10 @@ public class GameResultTest {
 						+ "{\"homeTeam\":\"Borussia Dortmund\",\"awayTeam\":\"Eintracht Frankfurt\",\"homeGoals\":3,\"awayGoals\":2}]",
 				InputFormat.JSON);
 
-		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(Collectors.toList());
-		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(Collectors.toList());
-		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore)
-				.collect(Collectors.toList());
-		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore)
-				.collect(Collectors.toList());
+		List<Team> homeTeamResults = gameResults.stream().map(GameResult::getHomeTeam).collect(toList());
+		List<Team> awayTeamResults = gameResults.stream().map(GameResult::getAwayTeam).collect(toList());
+		List<Integer> homeTeamScoreResults = gameResults.stream().map(GameResult::getHomeTeamScore).collect(toList());
+		List<Integer> awayTeamScoreResults = gameResults.stream().map(GameResult::getAwayTeamScore).collect(toList());
 
 		assertThat(homeTeamResults).containsExactly(new Team("Hertha BSC"), new Team("VfL Wolfsburg"),
 				new Team("FC Schalke 04"), new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),

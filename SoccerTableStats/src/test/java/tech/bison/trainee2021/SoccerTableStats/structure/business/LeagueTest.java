@@ -1,6 +1,7 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static tech.bison.trainee2021.SoccerTableStats.structure.business.GameResult.parseGameResults;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -315,7 +316,7 @@ public class LeagueTest {
 	@Test
 	void finishedBundesliga_generateStatistigsTable_isCorrectForFirstThreeTeams() {
 		League league = new League();
-		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
+		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
 		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
@@ -327,7 +328,7 @@ public class LeagueTest {
 	@Test
 	void finishedBundesliga_getResultsTable_teamsAreCorrectlySorted() {
 		League league = new League();
-		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
+		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
 		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
@@ -343,7 +344,7 @@ public class LeagueTest {
 	@Test
 	void finishedBundesliga_toFormattedTable_formattingIsCorrect() {
 		League league = new League();
-		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
+		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
 		String result = league.toFormattedTable();
 
@@ -372,7 +373,7 @@ public class LeagueTest {
 	@Test
 	void teamsWithSamePointsGoalDifferenceWins_getResultsTable_teamsAreSortedByAlphabet() {
 		League league = new League();
-		league.addGameResults(GameResult.parseGameResults(TEST_BUNDESLIGA_EQUAL, InputFormat.TEXT));
+		league.addGameResults(parseGameResults(TEST_BUNDESLIGA_EQUAL, InputFormat.TEXT));
 
 		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 

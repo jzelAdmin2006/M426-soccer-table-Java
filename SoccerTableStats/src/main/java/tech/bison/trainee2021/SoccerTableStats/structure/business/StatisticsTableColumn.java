@@ -1,5 +1,7 @@
 package tech.bison.trainee2021.SoccerTableStats.structure.business;
 
+import static java.lang.String.format;
+
 public enum StatisticsTableColumn {
 	WINS, TIES, LOSSES, GOALS, COUNTERGOALS, GOALDIFFERENCE, POINTS;
 
@@ -22,6 +24,6 @@ public enum StatisticsTableColumn {
 		}
 		// should never happen
 		throw new UnsupportedOperationException(
-				String.format("The designation of the column \"%s\" isn't implemented.", this));
+				format("The designation of the column \"%s\" isn't implemented.", this));
 	}
 };

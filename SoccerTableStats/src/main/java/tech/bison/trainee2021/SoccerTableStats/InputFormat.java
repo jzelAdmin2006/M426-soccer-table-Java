@@ -1,6 +1,7 @@
 package tech.bison.trainee2021.SoccerTableStats;
 
-import java.util.Arrays;
+import static java.lang.String.format;
+import static java.util.Arrays.stream;
 
 public enum InputFormat {
 	JSON(".json"), TEXT("");
@@ -12,10 +13,10 @@ public enum InputFormat {
 	}
 
 	public static InputFormat fromFileName(String fileName) {
-		return Arrays.stream(InputFormat.values())
-				.filter(format -> fileName.toLowerCase().endsWith(format.fileExtension)).findFirst()
+		return stream(InputFormat.values()).filter(format -> fileName.toLowerCase().endsWith(format.fileExtension))
+				.findFirst()
 				// should never happen
 				.orElseThrow(() -> new UnsupportedOperationException(
-						String.format("An input format for the file name \"%s\" isn't implemented.", fileName)));
+						format("An input format for the file name \"%s\" isn't implemented.", fileName)));
 	}
 }
