@@ -41,7 +41,7 @@ public class SoccerTableStats {
 		}
 	}
 
-	private static String validateGetEnv(String variable) throws EnvironmentVariableNotSetException {
+	private static String validateGetEnv(String variable) {
 		String value = getenv(variable);
 		if (value == null) {
 			throw new EnvironmentVariableNotSetException(variable);
