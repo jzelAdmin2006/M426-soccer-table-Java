@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.IntStream;
 
 public class League {
 	private static final String TEAM_DESIGNATION = "Team";
@@ -46,10 +47,8 @@ public class League {
 		StringBuilder tableContent = new StringBuilder();
 		List<Team> teamsOrdered = new ArrayList<>(statsTable.keySet());
 		List<Map<StatisticsTableColumn, Integer>> gridOrdered = new ArrayList<>(statsTable.values());
-		for (int i = 0; i < statsTable.size(); i++) {
-			buildTableRow(numOfTeamsDecPlaces, spacesBetweenRankAndGrid, spacesBetweenColumns, tableContent,
-					teamsOrdered, gridOrdered, i);
-		}
+		IntStream.range(0, statsTable.size()).forEach(i -> buildTableRow(numOfTeamsDecPlaces, spacesBetweenRankAndGrid,
+				spacesBetweenColumns, tableContent, teamsOrdered, gridOrdered, i));
 		return tableContent.toString().replaceAll("\\s+$", "");
 	}
 
@@ -62,10 +61,10 @@ public class League {
 		String spaceBetweenRankAndTeam = toSpaces(spacesBetweenRankAndGrid - teamName.length());
 		Collection<Integer> gridRowValues = gridOrdered.get(i).values();
 		StringBuilder gridRow = new StringBuilder();
-		for (int gridRowValue : gridRowValues) {
-			gridRow.append(toSpaces(spacesBetweenColumns + 1 - String.valueOf(gridRowValue).length()))
-					.append(gridRowValue);
-		}
+		gridRowValues.stream()
+				.map(gridRowValue -> toSpaces(spacesBetweenColumns + 1 - String.valueOf(gridRowValue).length())
+						+ gridRowValue)
+				.forEach(gridRow::append);
 		tableContent.append(format("%s%s%s%s%s%n", spaceBefore, counter, spaceBetweenRankAndTeam, teamName, gridRow));
 	}
 
