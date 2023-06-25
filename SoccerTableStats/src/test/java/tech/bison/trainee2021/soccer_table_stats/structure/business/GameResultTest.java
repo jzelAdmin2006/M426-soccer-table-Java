@@ -1,6 +1,7 @@
 package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResult;
 import static tech.bison.trainee2021.soccer_table_stats.structure.business.GameResult.parseGameResults;
 import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
@@ -9,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -172,6 +174,18 @@ class GameResultTest {
 		assertThat(gameResults).containsExactly(new GameResultDto("FC Vaduz", "FC Winterthur", 3, 0),
 				new GameResultDto("FC Schaffhausen", "FC Winterthur", 0, 0),
 				new GameResultDto("FC Thun", "FC Winterthur", 3, 1));
+	}
+
+	@Test
+	void nullInputFormat_parseGameResults_isIllegalArgument() {
+		InputFormat inputFormat = null;
+
+		ThrowingCallable shouldRaiseThrowable = () -> GameResult.parseGameResults(
+				"{\"homeTeam\":\"FC Wil 1900\",\"awayTeam\":\"SC Kriens\",\"homeGoals\":1,\"awayGoals\":4}",
+				inputFormat);
+
+		assertThatThrownBy(shouldRaiseThrowable).isInstanceOf(IllegalArgumentException.class)
+				.hasMessageContaining("cannot be null");
 	}
 
 }

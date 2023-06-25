@@ -56,12 +56,16 @@ public class GameResult {
 	}
 
 	public static List<GameResult> parseGameResults(String gameResultsToParse, InputFormat inputFormat) {
+		if (inputFormat == null) {
+			throw new IllegalArgumentException("Input format cannot be null.");
+		}
 		switch (inputFormat) {
 		case JSON:
 			return parseFromJson(gameResultsToParse);
 		case TEXT:
 			return parseFromText(gameResultsToParse);
 		}
+		// should never happen
 		throw new UnsupportedOperationException(
 				format("The game result parsing for the input format \"%s\" isn't implemented.", inputFormat));
 	}
