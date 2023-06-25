@@ -87,7 +87,7 @@ public class League {
 
 	public Map<Team, Map<StatisticsTableColumn, Integer>> generateStatisticsTable() {
 		final Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = new HashMap<>();
-		for (GameResult gameResult : gameResults) {
+		gameResults.forEach(gameResult -> {
 			final Team homeTeam = gameResult.getHomeTeam();
 			final Team awayTeam = gameResult.getAwayTeam();
 			final int homeTeamScore = gameResult.getHomeTeamScore();
@@ -99,7 +99,7 @@ public class League {
 			updateScoreStatistics(homeTeamScore, awayTeamScore, homeTeamStatistics);
 			updateScoreStatistics(awayTeamScore, homeTeamScore, awayTeamStatistics);
 			updateOutcomeStatistics(homeTeamScore, awayTeamScore, homeTeamStatistics, awayTeamStatistics);
-		}
+		});
 		return sortStats(statisticsTable, byPointsGoalDifferenceAlphabet());
 	}
 
