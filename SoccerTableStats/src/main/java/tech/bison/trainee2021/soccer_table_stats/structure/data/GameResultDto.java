@@ -30,7 +30,7 @@ public class GameResultDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GameResultDto other = (GameResultDto) obj;
+		final GameResultDto other = (GameResultDto) obj;
 		return awayGoals == other.awayGoals && Objects.equals(awayTeam, other.awayTeam) && homeGoals == other.homeGoals
 				&& Objects.equals(homeTeam, other.homeTeam);
 	}

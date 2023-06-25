@@ -11,9 +11,9 @@ import tech.bison.trainee2021.soccer_table_stats.structure.data.GameResultDto;
 class MapperServiceTest {
 	@Test
 	void newGameResultDto_fromDto_isCorrect() {
-		GameResultDto gameResult = new GameResultDto("asdf", "qwert", 5, 8);
+		final GameResultDto gameResult = new GameResultDto("asdf", "qwert", 5, 8);
 
-		GameResult result = new MapperService().fromDto(gameResult);
+		final GameResult result = new MapperService().fromDto(gameResult);
 
 		assertThat(result.getHomeTeam()).isEqualTo(new Team("asdf"));
 		assertThat(result.getAwayTeam()).isEqualTo(new Team("qwert"));

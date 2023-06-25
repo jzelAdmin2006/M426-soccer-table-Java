@@ -70,7 +70,7 @@ public class GameResult {
 	}
 
 	private static List<GameResult> parseFromJson(String json) {
-		JsonElement element = parseString(json);
+		final JsonElement element = parseString(json);
 		if (element.isJsonArray()) {
 			return parseFromJsonArray(element);
 		} else {
@@ -79,9 +79,9 @@ public class GameResult {
 	}
 
 	private static List<GameResult> parseFromJsonArray(JsonElement element) {
-		Type gameResultListType = new TypeToken<List<GameResultDto>>() {
+		final Type gameResultListType = new TypeToken<List<GameResultDto>>() {
 		}.getType();
-		List<GameResultDto> dtos = new Gson().fromJson(element, gameResultListType);
+		final List<GameResultDto> dtos = new Gson().fromJson(element, gameResultListType);
 		return mapToList(dtos, new MapperService()::fromDto);
 	}
 
@@ -90,8 +90,8 @@ public class GameResult {
 	}
 
 	private static List<GameResult> parseFromText(String gameResultsToParse) {
-		Matcher matcher = compile("^(.*?)\\s(\\d+):(\\d+)\\s(.*)$", MULTILINE).matcher(gameResultsToParse);
-		List<GameResult> gameResults = new ArrayList<>();
+		final Matcher matcher = compile("^(.*?)\\s(\\d+):(\\d+)\\s(.*)$", MULTILINE).matcher(gameResultsToParse);
+		final List<GameResult> gameResults = new ArrayList<>();
 		while (matcher.find()) {
 			gameResults.add(new GameResult(new Team(matcher.group(1)), new Team(matcher.group(4)),
 					parseInt(matcher.group(2)), parseInt(matcher.group(3))));

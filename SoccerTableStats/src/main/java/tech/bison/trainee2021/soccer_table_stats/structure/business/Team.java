@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Team {
 
-	private String name;
+	private final String name;
 
 	public Team(String name) {
 		this.name = name;
@@ -29,7 +29,7 @@ public class Team {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Team other = (Team) obj;
+		final Team other = (Team) obj;
 		return Objects.equals(name, other.name);
 	}
 }

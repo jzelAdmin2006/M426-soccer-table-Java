@@ -26,12 +26,12 @@ class GameResultTest {
 
 	@Test
 	void newGameResultWithTeamsAndScores_getTeamsAndScores_isCorrect() {
-		GameResult gameResult = new GameResult(new Team("HomeTeam"), new Team("AwayTeam"), 0, 1);
+		final GameResult gameResult = new GameResult(new Team("HomeTeam"), new Team("AwayTeam"), 0, 1);
 
-		Team homeTeamResult = gameResult.getHomeTeam();
-		Team awayTeamResult = gameResult.getAwayTeam();
-		int homeTeamScoreResult = gameResult.getHomeTeamScore();
-		int awayTeamScoreResult = gameResult.getAwayTeamScore();
+		final Team homeTeamResult = gameResult.getHomeTeam();
+		final Team awayTeamResult = gameResult.getAwayTeam();
+		final int homeTeamScoreResult = gameResult.getHomeTeamScore();
+		final int awayTeamScoreResult = gameResult.getAwayTeamScore();
 
 		assertThat(homeTeamResult).isEqualTo(new Team("HomeTeam"));
 		assertThat(awayTeamResult).isEqualTo(new Team("AwayTeam"));
@@ -41,12 +41,12 @@ class GameResultTest {
 
 	@Test
 	void newGameResultWitDifferentTeamsAndScores_getTeamsAndScores_isCorrect() {
-		GameResult gameResult = new GameResult(new Team("HomeTeam2"), new Team("AwayTeam2"), 1, 2);
+		final GameResult gameResult = new GameResult(new Team("HomeTeam2"), new Team("AwayTeam2"), 1, 2);
 
-		Team homeTeamResult = gameResult.getHomeTeam();
-		Team awayTeamResult = gameResult.getAwayTeam();
-		int homeTeamScoreResult = gameResult.getHomeTeamScore();
-		int awayTeamScoreResult = gameResult.getAwayTeamScore();
+		final Team homeTeamResult = gameResult.getHomeTeam();
+		final Team awayTeamResult = gameResult.getAwayTeam();
+		final int homeTeamScoreResult = gameResult.getHomeTeamScore();
+		final int awayTeamScoreResult = gameResult.getAwayTeamScore();
 
 		assertThat(homeTeamResult).isEqualTo(new Team("HomeTeam2"));
 		assertThat(awayTeamResult).isEqualTo(new Team("AwayTeam2"));
@@ -59,12 +59,12 @@ class GameResultTest {
 	void gameResultString_parseGameResult_isCorrect(String gameResultString, InputFormat inputFormat,
 			Team expectedHomeTeam, Team expectedAwayTeam, int expectedHomeTeamScore, int expectedAwayTeamScore,
 			String parsingDesignation) {
-		GameResult gameResult = parseGameResult(gameResultString, inputFormat);
+		final GameResult gameResult = parseGameResult(gameResultString, inputFormat);
 
-		Team homeTeamResult = gameResult.getHomeTeam();
-		Team awayTeamResult = gameResult.getAwayTeam();
-		int homeTeamScoreResult = gameResult.getHomeTeamScore();
-		int awayTeamScoreResult = gameResult.getAwayTeamScore();
+		final Team homeTeamResult = gameResult.getHomeTeam();
+		final Team awayTeamResult = gameResult.getAwayTeam();
+		final int homeTeamScoreResult = gameResult.getHomeTeamScore();
+		final int awayTeamScoreResult = gameResult.getAwayTeamScore();
 
 		assertThat(homeTeamResult).isEqualTo(expectedHomeTeam);
 		assertThat(awayTeamResult).isEqualTo(expectedAwayTeam);
@@ -88,12 +88,12 @@ class GameResultTest {
 	void gameResultsString_parseGameResults_isCorrect(String gameResultsString, InputFormat inputFormat,
 			List<Team> expectedHomeTeams, List<Team> expectedAwayTeams, List<Integer> expectedHomeTeamScores,
 			List<Integer> expectedAwayTeamScores, String parsingDesignation) {
-		List<GameResult> gameResults = parseGameResults(gameResultsString, inputFormat);
+		final List<GameResult> gameResults = parseGameResults(gameResultsString, inputFormat);
 
-		List<Team> homeTeamResults = mapToList(gameResults, GameResult::getHomeTeam);
-		List<Team> awayTeamResults = mapToList(gameResults, GameResult::getAwayTeam);
-		List<Integer> homeTeamScoreResults = mapToList(gameResults, GameResult::getHomeTeamScore);
-		List<Integer> awayTeamScoreResults = mapToList(gameResults, GameResult::getAwayTeamScore);
+		final List<Team> homeTeamResults = mapToList(gameResults, GameResult::getHomeTeam);
+		final List<Team> awayTeamResults = mapToList(gameResults, GameResult::getAwayTeam);
+		final List<Integer> homeTeamScoreResults = mapToList(gameResults, GameResult::getHomeTeamScore);
+		final List<Integer> awayTeamScoreResults = mapToList(gameResults, GameResult::getAwayTeamScore);
 
 		assertThat(homeTeamResults).containsExactlyElementsOf(expectedHomeTeams);
 		assertThat(awayTeamResults).containsExactlyElementsOf(expectedAwayTeams);
@@ -147,9 +147,9 @@ class GameResultTest {
 
 	@Test
 	void gameResultJson_parseGameResult_dtoIsCorrect() {
-		Gson gson = new Gson();
+		final Gson gson = new Gson();
 
-		GameResultDto gameResult = gson.fromJson(
+		final GameResultDto gameResult = gson.fromJson(
 				"{\"homeTeam\":\"FC Wil 1900\",\"awayTeam\":\"SC Kriens\",\"homeGoals\":1,\"awayGoals\":4}",
 				GameResultDto.class);
 
@@ -161,11 +161,11 @@ class GameResultTest {
 
 	@Test
 	void gameResultsJson_parseGameResults_dtoIsCorrect() {
-		Gson gson = new Gson();
+		final Gson gson = new Gson();
 
-		Type gameResultListType = new TypeToken<List<GameResultDto>>() {
+		final Type gameResultListType = new TypeToken<List<GameResultDto>>() {
 		}.getType();
-		List<GameResultDto> gameResults = gson.fromJson(
+		final List<GameResultDto> gameResults = gson.fromJson(
 				"[{\"homeTeam\":\"FC Vaduz\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":3,\"awayGoals\":0},"
 						+ "{\"homeTeam\":\"FC Schaffhausen\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":0,\"awayGoals\":0}"
 						+ ",{\"homeTeam\":\"FC Thun\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":3,\"awayGoals\":1}]",
@@ -178,9 +178,9 @@ class GameResultTest {
 
 	@Test
 	void nullInputFormat_parseGameResults_isIllegalArgument() {
-		InputFormat inputFormat = null;
+		final InputFormat inputFormat = null;
 
-		ThrowingCallable shouldRaiseThrowable = () -> GameResult.parseGameResults(
+		final ThrowingCallable shouldRaiseThrowable = () -> GameResult.parseGameResults(
 				"{\"homeTeam\":\"FC Wil 1900\",\"awayTeam\":\"SC Kriens\",\"homeGoals\":1,\"awayGoals\":4}",
 				inputFormat);
 

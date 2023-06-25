@@ -315,10 +315,10 @@ class LeagueTest {
 
 	@Test
 	void finishedBundesliga_generateStatistigsTable_isCorrectForFirstThreeTeams() {
-		League league = new League();
+		final League league = new League();
 		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
+		final Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
 		assertThat(statisticsTable.get(new Team("Hertha BSC")).values()).containsExactly(14, 8, 12, 71, 65, 6, 50);
 		assertThat(statisticsTable.get(new Team("1. FC Küln")).values()).containsExactly(16, 6, 12, 70, 60, 10, 54);
@@ -327,10 +327,10 @@ class LeagueTest {
 
 	@Test
 	void finishedBundesliga_getResultsTable_teamsAreCorrectlySorted() {
-		League league = new League();
+		final League league = new League();
 		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
+		final Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
 		assertThat(new ArrayList<>(statisticsTable.keySet())).containsExactly(new Team("Sport-Club Freiburg"),
 				new Team("1. FC Küln"), new Team("Bayer 04 Leverkusen"), new Team("VfL Wolfsburg"),
@@ -343,10 +343,10 @@ class LeagueTest {
 
 	@Test
 	void finishedBundesliga_toFormattedTable_formattingIsCorrect() {
-		League league = new League();
+		final League league = new League();
 		league.addGameResults(parseGameResults(TEST_BUNDESLIGA, InputFormat.TEXT));
 
-		String result = league.toFormattedTable();
+		final String result = league.toFormattedTable();
 
 		assertThat(result).isEqualTo(String.format("  #                           Team   W   T   L   +   -   =   P%n"
 				+ "--------------------------------------------------------------%n"
@@ -372,10 +372,10 @@ class LeagueTest {
 
 	@Test
 	void teamsWithSamePointsGoalDifferenceWins_getResultsTable_teamsAreSortedByAlphabet() {
-		League league = new League();
+		final League league = new League();
 		league.addGameResults(parseGameResults(TEST_BUNDESLIGA_EQUAL, InputFormat.TEXT));
 
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
+		final Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = league.generateStatisticsTable();
 
 		assertThat(new ArrayList<>(statisticsTable.keySet())).containsExactly(new Team("1. FC Küln"),
 				new Team("1. FC Union Berlin"), new Team("1. FSV Mainz 05"), new Team("Bayer 04 Leverkusen"),

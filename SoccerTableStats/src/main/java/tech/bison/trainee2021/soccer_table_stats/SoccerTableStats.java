@@ -24,13 +24,13 @@ public class SoccerTableStats {
 	}
 
 	private void writeOutputByInput() {
-		File[] inputFiles = new File(INPUT_FILES_LOCATION).listFiles();
+		final File[] inputFiles = new File(INPUT_FILES_LOCATION).listFiles();
 		for (File file : inputFiles) {
-			String destinationPath = Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString()
+			final String destinationPath = Path.of(OUTPUT_FILES_LOCATION).resolve(file.getName()).toString()
 					+ SOCCER_TABLE_STATS_FILE_EXTENSION;
 			try (FileOutputStream outputStream = new FileOutputStream(destinationPath)) {
-				League league = new League();
-				Path path = Path.of(file.getAbsolutePath());
+				final League league = new League();
+				final Path path = Path.of(file.getAbsolutePath());
 				league.addGameResults(parseGameResults(Files.readString(path),
 						InputFormat.fromFileName(path.getFileName().toString())));
 				outputStream.write(league.toFormattedTable().getBytes());
@@ -42,7 +42,7 @@ public class SoccerTableStats {
 	}
 
 	private static String validateGetEnv(String variable) {
-		String value = getenv(variable);
+		final String value = getenv(variable);
 		if (value == null) {
 			throw new EnvironmentVariableNotSetException(variable);
 		}

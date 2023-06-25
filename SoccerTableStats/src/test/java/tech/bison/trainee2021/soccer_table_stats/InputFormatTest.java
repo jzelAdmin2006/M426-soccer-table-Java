@@ -14,7 +14,7 @@ class InputFormatTest {
 	@ParameterizedTest(name = "{2}FileExtension_fromFileName_is{1}")
 	@MethodSource("provideValuesForInputFormat")
 	void fileWithExtension_fromFileName_isCorrect(String fileName, InputFormat expected, String inputName) {
-		InputFormat result = InputFormat.fromFileName(fileName);
+		final InputFormat result = InputFormat.fromFileName(fileName);
 
 		assertThat(result).isEqualTo(expected);
 	}

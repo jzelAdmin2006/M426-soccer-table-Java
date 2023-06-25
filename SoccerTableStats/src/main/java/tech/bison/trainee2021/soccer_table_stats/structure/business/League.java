@@ -26,26 +26,26 @@ public class League {
 	private final List<GameResult> gameResults = new ArrayList<>();
 
 	public String toFormattedTable() {
-		Map<Team, Map<StatisticsTableColumn, Integer>> statsTable = generateStatisticsTable();
-		int numOfTeamsDecPlaces = String.valueOf(statsTable.size()).length();
-		int longestTeamNamePlaces = findTeamWithLongestName(statsTable).getName().length();
-		int spacesBetweenRankAndGrid = longestTeamNamePlaces + SPACE_BETWEEN_LONGEST_NAME_AND_RANKINGNUMBER;
-		int spacesBetweenColumns = String.valueOf(findLargestValueAmountInTable(statsTable)).length() + 1;
-		String columnLabels = stream(StatisticsTableColumn.values()).map(column -> String.valueOf(column.translate()))
-				.collect(joining(toSpaces(spacesBetweenColumns)));
-		String firstLine = "%s#%s%s%s%s".formatted(toSpaces(numOfTeamsDecPlaces),
+		final Map<Team, Map<StatisticsTableColumn, Integer>> statsTable = generateStatisticsTable();
+		final int numOfTeamsDecPlaces = String.valueOf(statsTable.size()).length();
+		final int longestTeamNamePlaces = findTeamWithLongestName(statsTable).getName().length();
+		final int spacesBetweenRankAndGrid = longestTeamNamePlaces + SPACE_BETWEEN_LONGEST_NAME_AND_RANKINGNUMBER;
+		final int spacesBetweenColumns = String.valueOf(findLargestValueAmountInTable(statsTable)).length() + 1;
+		final String columnLabels = stream(StatisticsTableColumn.values())
+				.map(column -> String.valueOf(column.translate())).collect(joining(toSpaces(spacesBetweenColumns)));
+		final String firstLine = "%s#%s%s%s%s".formatted(toSpaces(numOfTeamsDecPlaces),
 				toSpaces(spacesBetweenRankAndGrid - TEAM_DESIGNATION.length()), TEAM_DESIGNATION,
 				toSpaces(spacesBetweenColumns), columnLabels);
-		String secondLine = "-".repeat(firstLine.length());
+		final String secondLine = "-".repeat(firstLine.length());
 		return "%s%n%s%n%s".formatted(firstLine, secondLine,
 				buildTableContent(statsTable, numOfTeamsDecPlaces, spacesBetweenRankAndGrid, spacesBetweenColumns));
 	}
 
 	private String buildTableContent(Map<Team, Map<StatisticsTableColumn, Integer>> statsTable, int numOfTeamsDecPlaces,
 			int spacesBetweenRankAndGrid, int spacesBetweenColumns) {
-		StringBuilder tableContent = new StringBuilder();
-		List<Team> teamsOrdered = new ArrayList<>(statsTable.keySet());
-		List<Map<StatisticsTableColumn, Integer>> gridOrdered = new ArrayList<>(statsTable.values());
+		final StringBuilder tableContent = new StringBuilder();
+		final List<Team> teamsOrdered = new ArrayList<>(statsTable.keySet());
+		final List<Map<StatisticsTableColumn, Integer>> gridOrdered = new ArrayList<>(statsTable.values());
 		IntStream.range(0, statsTable.size()).forEach(i -> buildTableRow(numOfTeamsDecPlaces, spacesBetweenRankAndGrid,
 				spacesBetweenColumns, tableContent, teamsOrdered, gridOrdered, i));
 		return tableContent.toString().replaceAll("\\s+$", "");
@@ -54,12 +54,12 @@ public class League {
 	private void buildTableRow(int numOfTeamsDecPlaces, int spacesBetweenRankAndGrid, int spacesBetweenColumns,
 			StringBuilder tableContent, List<Team> teamsOrdered, List<Map<StatisticsTableColumn, Integer>> gridOrdered,
 			int i) {
-		int counter = i + 1;
-		String spaceBefore = toSpaces(numOfTeamsDecPlaces + 1 - String.valueOf(counter).length());
-		String teamName = teamsOrdered.get(i).getName();
-		String spaceBetweenRankAndTeam = toSpaces(spacesBetweenRankAndGrid - teamName.length());
-		Collection<Integer> gridRowValues = gridOrdered.get(i).values();
-		StringBuilder gridRow = new StringBuilder();
+		final int counter = i + 1;
+		final String spaceBefore = toSpaces(numOfTeamsDecPlaces + 1 - String.valueOf(counter).length());
+		final String teamName = teamsOrdered.get(i).getName();
+		final String spaceBetweenRankAndTeam = toSpaces(spacesBetweenRankAndGrid - teamName.length());
+		final Collection<Integer> gridRowValues = gridOrdered.get(i).values();
+		final StringBuilder gridRow = new StringBuilder();
 		gridRowValues.stream()
 				.map(gridRowValue -> toSpaces(spacesBetweenColumns + 1 - String.valueOf(gridRowValue).length())
 						+ gridRowValue)
@@ -86,16 +86,16 @@ public class League {
 	}
 
 	public Map<Team, Map<StatisticsTableColumn, Integer>> generateStatisticsTable() {
-		Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = new HashMap<>();
+		final Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable = new HashMap<>();
 		for (GameResult gameResult : gameResults) {
-			Team homeTeam = gameResult.getHomeTeam();
-			Team awayTeam = gameResult.getAwayTeam();
-			int homeTeamScore = gameResult.getHomeTeamScore();
-			int awayTeamScore = gameResult.getAwayTeamScore();
+			final Team homeTeam = gameResult.getHomeTeam();
+			final Team awayTeam = gameResult.getAwayTeam();
+			final int homeTeamScore = gameResult.getHomeTeamScore();
+			final int awayTeamScore = gameResult.getAwayTeamScore();
 			initializeTeamStatistics(statisticsTable, homeTeam);
 			initializeTeamStatistics(statisticsTable, awayTeam);
-			Map<StatisticsTableColumn, Integer> homeTeamStatistics = statisticsTable.get(homeTeam);
-			Map<StatisticsTableColumn, Integer> awayTeamStatistics = statisticsTable.get(awayTeam);
+			final Map<StatisticsTableColumn, Integer> homeTeamStatistics = statisticsTable.get(homeTeam);
+			final Map<StatisticsTableColumn, Integer> awayTeamStatistics = statisticsTable.get(awayTeam);
 			updateScoreStatistics(homeTeamScore, awayTeamScore, homeTeamStatistics);
 			updateScoreStatistics(awayTeamScore, homeTeamScore, awayTeamStatistics);
 			updateOutcomeStatistics(homeTeamScore, awayTeamScore, homeTeamStatistics, awayTeamStatistics);
@@ -120,7 +120,7 @@ public class League {
 
 	private void initializeTeamStatistics(Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable, Team team) {
 		if (statisticsTable.get(team) == null) {
-			EnumMap<StatisticsTableColumn, Integer> initialTeamStatistics = new EnumMap<>(StatisticsTableColumn.class);
+			final EnumMap<StatisticsTableColumn, Integer> initialTeamStatistics = new EnumMap<>(StatisticsTableColumn.class);
 			for (StatisticsTableColumn statisticsTableColumn : StatisticsTableColumn.values()) {
 				initialTeamStatistics.put(statisticsTableColumn, 0);
 			}
