@@ -1,6 +1,5 @@
 package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
-import static java.lang.String.format;
 import static java.util.Arrays.stream;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
@@ -34,11 +33,11 @@ public class League {
 		int spacesBetweenColumns = String.valueOf(findLargestValueAmountInTable(statsTable)).length() + 1;
 		String columnLabels = stream(StatisticsTableColumn.values()).map(column -> String.valueOf(column.translate()))
 				.collect(joining(toSpaces(spacesBetweenColumns)));
-		String firstLine = format("%s#%s%s%s%s", toSpaces(numOfTeamsDecPlaces),
+		String firstLine = "%s#%s%s%s%s".formatted(toSpaces(numOfTeamsDecPlaces),
 				toSpaces(spacesBetweenRankAndGrid - TEAM_DESIGNATION.length()), TEAM_DESIGNATION,
 				toSpaces(spacesBetweenColumns), columnLabels);
 		String secondLine = "-".repeat(firstLine.length());
-		return format("%s%n%s%n%s", firstLine, secondLine,
+		return "%s%n%s%n%s".formatted(firstLine, secondLine,
 				buildTableContent(statsTable, numOfTeamsDecPlaces, spacesBetweenRankAndGrid, spacesBetweenColumns));
 	}
 
@@ -65,7 +64,7 @@ public class League {
 				.map(gridRowValue -> toSpaces(spacesBetweenColumns + 1 - String.valueOf(gridRowValue).length())
 						+ gridRowValue)
 				.forEach(gridRow::append);
-		tableContent.append(format("%s%s%s%s%s%n", spaceBefore, counter, spaceBetweenRankAndTeam, teamName, gridRow));
+		tableContent.append("%s%s%s%s%s%n".formatted(spaceBefore, counter, spaceBetweenRankAndTeam, teamName, gridRow));
 	}
 
 	private String toSpaces(int numberOfSpaces) {

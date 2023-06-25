@@ -1,6 +1,5 @@
 package tech.bison.trainee2021.soccer_table_stats;
 
-import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
 public enum InputFormat {
@@ -17,6 +16,6 @@ public enum InputFormat {
 				.findFirst()
 				// should never happen
 				.orElseThrow(() -> new UnsupportedOperationException(
-						format("An input format for the file name \"%s\" isn't implemented.", fileName)));
+						"An input format for the file name \"%s\" isn't implemented.".formatted(fileName)));
 	}
 }

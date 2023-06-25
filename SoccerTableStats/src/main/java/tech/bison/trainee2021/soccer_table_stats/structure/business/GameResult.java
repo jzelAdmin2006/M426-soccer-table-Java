@@ -2,7 +2,6 @@ package tech.bison.trainee2021.soccer_table_stats.structure.business;
 
 import static com.google.gson.JsonParser.parseString;
 import static java.lang.Integer.parseInt;
-import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
@@ -67,7 +66,7 @@ public class GameResult {
 		}
 		// should never happen
 		throw new UnsupportedOperationException(
-				format("The game result parsing for the input format \"%s\" isn't implemented.", inputFormat));
+				"The game result parsing for the input format \"%s\" isn't implemented.".formatted(inputFormat));
 	}
 
 	private static List<GameResult> parseFromJson(String json) {
