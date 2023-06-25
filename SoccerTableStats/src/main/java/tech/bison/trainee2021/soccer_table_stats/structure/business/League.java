@@ -119,7 +119,7 @@ public class League {
 	}
 
 	private Comparator<Entry<Team, Map<StatisticsTableColumn, Integer>>> byPointsGoalDifferenceAlphabet() {
-		return comparing((Map.Entry<Team, Map<StatisticsTableColumn, Integer>> entry) -> entry.getValue()
+		return comparing((Entry<Team, Map<StatisticsTableColumn, Integer>> entry) -> entry.getValue()
 				.get(StatisticsTableColumn.POINTS))
 				.thenComparing(entry -> entry.getValue().get(StatisticsTableColumn.GOALDIFFERENCE))
 				.thenComparing(entry -> entry.getValue().get(StatisticsTableColumn.WINS))
@@ -130,15 +130,7 @@ public class League {
 			Map<Team, Map<StatisticsTableColumn, Integer>> unsortedStats,
 			Comparator<Entry<Team, Map<StatisticsTableColumn, Integer>>> byValues) {
 		return unsortedStats.entrySet().stream().sorted(byValues.reversed())
-				.collect(toMap(Map.Entry::getKey, Map.Entry::getValue, this::mergeMaps, LinkedHashMap::new));
-	}
-
-	private Map<StatisticsTableColumn, Integer> mergeMaps(Map<StatisticsTableColumn, Integer> firstMap,
-			Map<StatisticsTableColumn, Integer> secondMap) {
-		Map<StatisticsTableColumn, Integer> mergedMap = new LinkedHashMap<>(firstMap);
-		secondMap.forEach(
-				(key, value) -> mergedMap.merge(key, value, (firstValue, secondValue) -> firstValue + secondValue));
-		return mergedMap;
+				.collect(toMap(Entry::getKey, Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 	}
 
 	private void initializeTeamStatistics(Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable, Team team) {
