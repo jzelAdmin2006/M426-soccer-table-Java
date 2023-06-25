@@ -6,7 +6,6 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toMap;
 import static tech.bison.trainee2021.soccer_table_stats.util.StreamUtils.mapToList;
 
 import java.util.ArrayList;
@@ -129,8 +128,8 @@ public class League {
 	private Map<Team, Map<StatisticsTableColumn, Integer>> sortStats(
 			Map<Team, Map<StatisticsTableColumn, Integer>> unsortedStats,
 			Comparator<Entry<Team, Map<StatisticsTableColumn, Integer>>> byValues) {
-		return unsortedStats.entrySet().stream().sorted(byValues.reversed())
-				.collect(toMap(Entry::getKey, Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+		return unsortedStats.entrySet().stream().sorted(byValues.reversed()).collect(LinkedHashMap::new,
+				(map, entry) -> map.put(entry.getKey(), entry.getValue()), LinkedHashMap::putAll);
 	}
 
 	private void initializeTeamStatistics(Map<Team, Map<StatisticsTableColumn, Integer>> statisticsTable, Team team) {
