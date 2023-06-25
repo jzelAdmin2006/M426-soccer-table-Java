@@ -11,307 +11,619 @@ import org.junit.jupiter.api.Test;
 import tech.bison.trainee2021.soccer_table_stats.InputFormat;
 
 class LeagueTest {
-	private static final String TEST_BUNDESLIGA = "Hertha BSC 4:3 1. FC Küln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n"
-			+ "FC Schalke 04 2:2 TSG Hoffenheim\n" + "Borussia Münchengladbach 0:2 Sport-Club Freiburg\n"
-			+ "RB Leipzig 0:4 1. FSV Mainz 05\n" + "SV Werder Bremen 0:2 VfB Stuttgart\n"
-			+ "Borussia Dortmund 3:2 Eintracht Frankfurt\n" + "Bayer 04 Leverkusen 5:1 VfL Bochum 1848\n"
-			+ "FC Bayern München 1:1 1. FC Union Berlin\n" + "Borussia Münchengladbach 1:1 1. FC Union Berlin\n"
-			+ "FC Schalke 04 5:0 RB Leipzig\n" + "Eintracht Frankfurt 2:1 SV Werder Bremen\n"
-			+ "1. FC Küln 4:0 VfB Stuttgart\n" + "Sport-Club Freiburg 2:1 Borussia Dortmund\n"
-			+ "Bayer 04 Leverkusen 0:3 VfL Wolfsburg\n" + "Hertha BSC 0:1 1. FSV Mainz 05\n"
-			+ "FC Augsburg 2:2 FC Bayern München\n" + "VfL Bochum 1848 1:1 TSG Hoffenheim\n"
-			+ "Bayer 04 Leverkusen 1:5 Hertha BSC\n" + "VfB Stuttgart 1:5 1. FC Küln\n"
-			+ "Borussia Dortmund 2:3 RB Leipzig\n" + "TSG Hoffenheim 1:1 VfL Bochum 1848\n"
-			+ "Eintracht Frankfurt 0:2 1. FC Union Berlin\n" + "Sport-Club Freiburg 2:1 FC Schalke 04\n"
-			+ "VfL Wolfsburg 0:2 SV Werder Bremen\n" + "Borussia Münchengladbach 5:1 FC Augsburg\n"
-			+ "1. FSV Mainz 05 5:5 FC Bayern München\n" + "Borussia Münchengladbach 1:1 VfL Bochum 1848\n"
-			+ "RB Leipzig 1:5 VfL Wolfsburg\n" + "SV Werder Bremen 5:5 Borussia Dortmund\n"
-			+ "Bayer 04 Leverkusen 1:2 Sport-Club Freiburg\n" + "1. FC Union Berlin 2:2 FC Bayern München\n"
-			+ "1. FSV Mainz 05 1:0 1. FC Küln\n" + "Eintracht Frankfurt 3:0 FC Schalke 04\n"
-			+ "VfB Stuttgart 2:1 FC Augsburg\n" + "TSG Hoffenheim 4:0 Hertha BSC\n" + "VfL Wolfsburg 4:1 RB Leipzig\n"
-			+ "FC Augsburg 1:1 1. FC Küln\n" + "FC Bayern München 3:0 FC Schalke 04\n"
-			+ "Borussia Dortmund 3:0 TSG Hoffenheim\n" + "VfB Stuttgart 3:2 Borussia Münchengladbach\n"
-			+ "Hertha BSC 1:2 Bayer 04 Leverkusen\n" + "VfL Bochum 1848 2:0 1. FSV Mainz 05\n"
-			+ "Sport-Club Freiburg 2:2 SV Werder Bremen\n" + "1. FC Union Berlin 0:4 Eintracht Frankfurt\n"
-			+ "FC Schalke 04 0:0 VfB Stuttgart\n" + "1. FC Union Berlin 0:0 Hertha BSC\n"
-			+ "Eintracht Frankfurt 4:1 FC Bayern München\n" + "Sport-Club Freiburg 4:2 1. FC Küln\n"
-			+ "VfL Bochum 1848 1:1 Bayer 04 Leverkusen\n" + "1. FSV Mainz 05 3:1 RB Leipzig\n"
-			+ "FC Augsburg 0:0 TSG Hoffenheim\n" + "SV Werder Bremen 0:2 Borussia Münchengladbach\n"
-			+ "VfL Wolfsburg 2:1 Borussia Dortmund\n" + "VfL Bochum 1848 2:3 Borussia Münchengladbach\n"
-			+ "SV Werder Bremen 0:5 1. FC Küln\n" + "VfB Stuttgart 0:2 Borussia Dortmund\n"
-			+ "Eintracht Frankfurt 2:1 Sport-Club Freiburg\n" + "1. FC Union Berlin 2:3 Bayer 04 Leverkusen\n"
-			+ "FC Schalke 04 4:0 FC Bayern München\n" + "RB Leipzig 2:2 Hertha BSC\n"
-			+ "1. FSV Mainz 05 3:2 FC Augsburg\n" + "VfL Wolfsburg 3:3 TSG Hoffenheim\n" + "RB Leipzig 1:1 1. FC Küln\n"
-			+ "SV Werder Bremen 0:0 VfL Wolfsburg\n" + "FC Bayern München 4:0 1. FSV Mainz 05\n"
-			+ "VfB Stuttgart 3:3 FC Schalke 04\n" + "Hertha BSC 0:1 VfL Bochum 1848\n"
-			+ "1. FC Union Berlin 5:1 TSG Hoffenheim\n" + "Sport-Club Freiburg 3:1 Eintracht Frankfurt\n"
-			+ "FC Augsburg 0:2 Borussia Münchengladbach\n" + "Bayer 04 Leverkusen 1:1 Borussia Dortmund\n"
-			+ "FC Augsburg 1:1 SV Werder Bremen\n" + "VfB Stuttgart 2:3 1. FC Union Berlin\n"
-			+ "Eintracht Frankfurt 5:1 1. FSV Mainz 05\n" + "Borussia Dortmund 1:1 VfL Wolfsburg\n"
-			+ "FC Bayern München 4:4 Sport-Club Freiburg\n" + "Bayer 04 Leverkusen 2:1 FC Schalke 04\n"
-			+ "1. FC Küln 1:1 RB Leipzig\n" + "Hertha BSC 0:2 TSG Hoffenheim\n"
-			+ "1. FC Küln 5:3 Borussia Münchengladbach\n" + "VfB Stuttgart 1:0 Bayer 04 Leverkusen\n"
-			+ "Sport-Club Freiburg 0:5 FC Bayern München\n" + "1. FSV Mainz 05 1:2 Borussia Dortmund\n"
-			+ "RB Leipzig 2:2 Eintracht Frankfurt\n" + "SV Werder Bremen 0:4 TSG Hoffenheim\n"
-			+ "VfL Wolfsburg 2:0 FC Schalke 04\n" + "VfL Bochum 1848 5:0 Hertha BSC\n"
-			+ "1. FC Union Berlin 4:2 FC Augsburg\n" + "TSG Hoffenheim 5:5 1. FC Union Berlin\n"
-			+ "1. FC Küln 0:1 Sport-Club Freiburg\n" + "Eintracht Frankfurt 2:1 Borussia Dortmund\n"
-			+ "SV Werder Bremen 1:1 Hertha BSC\n" + "Borussia Münchengladbach 5:2 Bayer 04 Leverkusen\n"
-			+ "FC Bayern München 0:0 FC Augsburg\n" + "1. FSV Mainz 05 0:1 FC Schalke 04\n"
-			+ "RB Leipzig 2:2 VfL Bochum 1848\n" + "VfL Wolfsburg 0:0 VfB Stuttgart\n"
-			+ "Borussia Dortmund 0:4 Bayer 04 Leverkusen\n" + "VfB Stuttgart 2:3 Eintracht Frankfurt\n"
-			+ "RB Leipzig 1:4 1. FC Union Berlin\n" + "TSG Hoffenheim 4:4 VfL Wolfsburg\n"
-			+ "SV Werder Bremen 1:1 FC Schalke 04\n" + "FC Augsburg 4:5 Sport-Club Freiburg\n"
-			+ "FC Bayern München 0:1 Hertha BSC\n" + "Borussia Münchengladbach 2:0 1. FSV Mainz 05\n"
-			+ "VfL Bochum 1848 3:4 1. FC Küln\n" + "VfL Bochum 1848 2:2 RB Leipzig\n"
-			+ "VfB Stuttgart 1:0 SV Werder Bremen\n" + "TSG Hoffenheim 3:1 Borussia Münchengladbach\n"
-			+ "FC Schalke 04 1:0 1. FSV Mainz 05\n" + "VfL Wolfsburg 4:3 FC Bayern München\n"
-			+ "Sport-Club Freiburg 2:2 Bayer 04 Leverkusen\n" + "Eintracht Frankfurt 5:1 1. FC Küln\n"
-			+ "FC Augsburg 0:0 1. FC Union Berlin\n" + "Borussia Dortmund 1:3 Hertha BSC\n"
-			+ "FC Schalke 04 1:2 Hertha BSC\n" + "Sport-Club Freiburg 0:5 RB Leipzig\n"
-			+ "1. FC Küln 2:0 FC Bayern München\n" + "Bayer 04 Leverkusen 2:5 VfB Stuttgart\n"
-			+ "SV Werder Bremen 2:0 VfL Bochum 1848\n" + "Eintracht Frankfurt 0:0 FC Augsburg\n"
-			+ "Borussia Dortmund 0:1 1. FC Union Berlin\n" + "Borussia Münchengladbach 1:1 TSG Hoffenheim\n"
-			+ "1. FSV Mainz 05 0:1 VfL Wolfsburg\n" + "Hertha BSC 1:5 1. FC Union Berlin\n"
-			+ "FC Augsburg 4:1 RB Leipzig\n" + "FC Bayern München 2:1 Bayer 04 Leverkusen\n"
-			+ "Sport-Club Freiburg 1:0 Borussia Münchengladbach\n" + "1. FSV Mainz 05 5:0 VfL Bochum 1848\n"
-			+ "VfB Stuttgart 2:1 VfL Wolfsburg\n" + "FC Schalke 04 1:1 Borussia Dortmund\n"
-			+ "1. FC Küln 3:2 Eintracht Frankfurt\n" + "TSG Hoffenheim 0:3 SV Werder Bremen\n"
-			+ "FC Schalke 04 0:2 Bayer 04 Leverkusen\n" + "FC Bayern München 1:0 Eintracht Frankfurt\n"
-			+ "FC Augsburg 1:2 Borussia Dortmund\n" + "1. FC Union Berlin 0:4 Sport-Club Freiburg\n"
-			+ "TSG Hoffenheim 0:4 1. FC Küln\n" + "VfL Bochum 1848 2:1 VfL Wolfsburg\n"
-			+ "RB Leipzig 5:1 VfB Stuttgart\n" + "Borussia Münchengladbach 0:0 Hertha BSC\n"
-			+ "SV Werder Bremen 1:0 1. FSV Mainz 05\n" + "Sport-Club Freiburg 3:4 VfB Stuttgart\n"
-			+ "RB Leipzig 0:0 Bayer 04 Leverkusen\n" + "VfL Bochum 1848 1:1 Eintracht Frankfurt\n"
-			+ "Hertha BSC 1:2 VfL Wolfsburg\n" + "1. FC Union Berlin 0:0 Borussia Dortmund\n"
-			+ "TSG Hoffenheim 1:1 FC Augsburg\n" + "Borussia Münchengladbach 1:2 FC Schalke 04\n"
-			+ "1. FC Küln 0:1 SV Werder Bremen\n" + "1. FC Küln 2:0 Hertha BSC\n" + "FC Augsburg 2:1 VfL Wolfsburg\n"
-			+ "TSG Hoffenheim 1:1 FC Schalke 04\n" + "Sport-Club Freiburg 1:0 Borussia Münchengladbach\n"
-			+ "1. FSV Mainz 05 1:1 RB Leipzig\n" + "VfB Stuttgart 2:0 SV Werder Bremen\n"
-			+ "Eintracht Frankfurt 2:0 Borussia Dortmund\n" + "VfL Bochum 1848 1:5 Bayer 04 Leverkusen\n"
-			+ "1. FC Union Berlin 2:5 FC Bayern München\n" + "1. FC Union Berlin 0:2 Borussia Münchengladbach\n"
-			+ "RB Leipzig 1:3 FC Schalke 04\n" + "SV Werder Bremen 4:1 Eintracht Frankfurt\n"
-			+ "VfB Stuttgart 4:0 1. FC Küln\n" + "Borussia Dortmund 3:5 Sport-Club Freiburg\n"
-			+ "VfL Wolfsburg 0:2 Bayer 04 Leverkusen\n" + "1. FSV Mainz 05 1:1 Hertha BSC\n"
-			+ "FC Bayern München 2:2 FC Augsburg\n" + "TSG Hoffenheim 2:1 VfL Bochum 1848\n"
-			+ "Hertha BSC 1:2 Bayer 04 Leverkusen\n" + "1. FC Küln 1:0 VfB Stuttgart\n"
-			+ "RB Leipzig 4:2 Borussia Dortmund\n" + "VfL Bochum 1848 2:4 TSG Hoffenheim\n"
-			+ "1. FC Union Berlin 2:3 Eintracht Frankfurt\n" + "FC Schalke 04 2:2 Sport-Club Freiburg\n"
-			+ "SV Werder Bremen 0:5 VfL Wolfsburg\n" + "FC Augsburg 2:1 Borussia Münchengladbach\n"
-			+ "FC Bayern München 1:4 1. FSV Mainz 05\n" + "VfL Bochum 1848 3:3 Borussia Münchengladbach\n"
-			+ "VfL Wolfsburg 0:5 RB Leipzig\n" + "Borussia Dortmund 2:4 SV Werder Bremen\n"
-			+ "Sport-Club Freiburg 1:0 Bayer 04 Leverkusen\n" + "FC Bayern München 0:1 1. FC Union Berlin\n"
-			+ "1. FC Küln 4:3 1. FSV Mainz 05\n" + "FC Schalke 04 0:2 Eintracht Frankfurt\n"
-			+ "FC Augsburg 1:0 VfB Stuttgart\n" + "Hertha BSC 2:0 TSG Hoffenheim\n" + "RB Leipzig 1:5 VfL Wolfsburg\n"
-			+ "1. FC Küln 2:4 FC Augsburg\n" + "FC Schalke 04 1:0 FC Bayern München\n"
-			+ "TSG Hoffenheim 1:0 Borussia Dortmund\n" + "Borussia Münchengladbach 1:1 VfB Stuttgart\n"
-			+ "Bayer 04 Leverkusen 2:0 Hertha BSC\n" + "1. FSV Mainz 05 0:2 VfL Bochum 1848\n"
-			+ "SV Werder Bremen 4:5 Sport-Club Freiburg\n" + "Eintracht Frankfurt 0:2 1. FC Union Berlin\n"
-			+ "VfB Stuttgart 1:1 FC Schalke 04\n" + "Hertha BSC 2:2 1. FC Union Berlin\n"
-			+ "FC Bayern München 1:1 Eintracht Frankfurt\n" + "1. FC Küln 2:1 Sport-Club Freiburg\n"
-			+ "Bayer 04 Leverkusen 2:0 VfL Bochum 1848\n" + "RB Leipzig 1:1 1. FSV Mainz 05\n"
-			+ "TSG Hoffenheim 3:0 FC Augsburg\n" + "Borussia Münchengladbach 4:1 SV Werder Bremen\n"
-			+ "Borussia Dortmund 4:5 VfL Wolfsburg\n" + "Borussia Münchengladbach 2:0 VfL Bochum 1848\n"
-			+ "1. FC Küln 3:3 SV Werder Bremen\n" + "Borussia Dortmund 0:2 VfB Stuttgart\n"
-			+ "Sport-Club Freiburg 2:0 Eintracht Frankfurt\n" + "Bayer 04 Leverkusen 5:2 1. FC Union Berlin\n"
-			+ "FC Bayern München 5:2 FC Schalke 04\n" + "Hertha BSC 3:0 RB Leipzig\n"
-			+ "FC Augsburg 0:2 1. FSV Mainz 05\n" + "TSG Hoffenheim 5:2 VfL Wolfsburg\n" + "1. FC Küln 3:1 RB Leipzig\n"
-			+ "VfL Wolfsburg 0:1 SV Werder Bremen\n" + "1. FSV Mainz 05 5:1 FC Bayern München\n"
-			+ "FC Schalke 04 1:0 VfB Stuttgart\n" + "VfL Bochum 1848 3:5 Hertha BSC\n"
-			+ "TSG Hoffenheim 0:1 1. FC Union Berlin\n" + "Eintracht Frankfurt 2:4 Sport-Club Freiburg\n"
-			+ "Borussia Münchengladbach 2:0 FC Augsburg\n" + "Borussia Dortmund 1:2 Bayer 04 Leverkusen\n"
-			+ "SV Werder Bremen 0:4 FC Augsburg\n" + "1. FC Union Berlin 1:4 VfB Stuttgart\n"
-			+ "1. FSV Mainz 05 5:5 Eintracht Frankfurt\n" + "VfL Wolfsburg 0:2 Borussia Dortmund\n"
-			+ "Sport-Club Freiburg 3:5 FC Bayern München\n" + "FC Schalke 04 4:1 Bayer 04 Leverkusen\n"
-			+ "RB Leipzig 0:1 1. FC Küln\n" + "TSG Hoffenheim 3:5 Hertha BSC\n"
-			+ "Borussia Münchengladbach 1:1 1. FC Küln\n" + "Bayer 04 Leverkusen 0:5 VfB Stuttgart\n"
-			+ "FC Bayern München 0:2 Sport-Club Freiburg\n" + "Borussia Dortmund 1:1 1. FSV Mainz 05\n"
-			+ "Eintracht Frankfurt 1:1 RB Leipzig\n" + "TSG Hoffenheim 1:1 SV Werder Bremen\n"
-			+ "FC Schalke 04 2:2 VfL Wolfsburg\n" + "Hertha BSC 2:5 VfL Bochum 1848\n"
-			+ "FC Augsburg 0:1 1. FC Union Berlin\n" + "1. FC Union Berlin 1:2 TSG Hoffenheim\n"
-			+ "Sport-Club Freiburg 5:3 1. FC Küln\n" + "Borussia Dortmund 4:0 Eintracht Frankfurt\n"
-			+ "Hertha BSC 4:0 SV Werder Bremen\n" + "Bayer 04 Leverkusen 2:2 Borussia Münchengladbach\n"
-			+ "FC Augsburg 2:0 FC Bayern München\n" + "FC Schalke 04 2:1 1. FSV Mainz 05\n"
-			+ "VfL Bochum 1848 4:4 RB Leipzig\n" + "VfB Stuttgart 0:1 VfL Wolfsburg\n"
-			+ "Bayer 04 Leverkusen 1:1 Borussia Dortmund\n" + "Eintracht Frankfurt 1:1 VfB Stuttgart\n"
-			+ "1. FC Union Berlin 2:1 RB Leipzig\n" + "VfL Wolfsburg 3:1 TSG Hoffenheim\n"
-			+ "FC Schalke 04 1:3 SV Werder Bremen\n" + "Sport-Club Freiburg 0:3 FC Augsburg\n"
-			+ "Hertha BSC 5:4 FC Bayern München\n" + "1. FSV Mainz 05 2:3 Borussia Münchengladbach\n"
-			+ "1. FC Küln 1:0 VfL Bochum 1848\n" + "RB Leipzig 4:5 VfL Bochum 1848\n"
-			+ "SV Werder Bremen 0:4 VfB Stuttgart\n" + "Borussia Münchengladbach 4:1 TSG Hoffenheim\n"
-			+ "1. FSV Mainz 05 2:0 FC Schalke 04\n" + "FC Bayern München 0:5 VfL Wolfsburg\n"
-			+ "Bayer 04 Leverkusen 2:2 Sport-Club Freiburg\n" + "1. FC Küln 2:2 Eintracht Frankfurt\n"
-			+ "1. FC Union Berlin 1:5 FC Augsburg\n" + "Hertha BSC 3:3 Borussia Dortmund\n"
-			+ "Hertha BSC 4:1 FC Schalke 04\n" + "RB Leipzig 3:0 Sport-Club Freiburg\n"
-			+ "FC Bayern München 2:1 1. FC Küln\n" + "VfB Stuttgart 0:1 Bayer 04 Leverkusen\n"
-			+ "VfL Bochum 1848 5:2 SV Werder Bremen\n" + "FC Augsburg 0:0 Eintracht Frankfurt\n"
-			+ "1. FC Union Berlin 1:1 Borussia Dortmund\n" + "TSG Hoffenheim 3:2 Borussia Münchengladbach\n"
-			+ "VfL Wolfsburg 1:4 1. FSV Mainz 05\n" + "1. FC Union Berlin 0:4 Hertha BSC\n"
-			+ "RB Leipzig 1:1 FC Augsburg\n" + "Bayer 04 Leverkusen 1:1 FC Bayern München\n"
-			+ "Borussia Münchengladbach 5:0 Sport-Club Freiburg\n" + "VfL Bochum 1848 5:2 1. FSV Mainz 05\n"
-			+ "VfL Wolfsburg 0:1 VfB Stuttgart\n" + "Borussia Dortmund 1:5 FC Schalke 04\n"
-			+ "Eintracht Frankfurt 1:2 1. FC Küln\n" + "SV Werder Bremen 2:1 TSG Hoffenheim\n"
-			+ "Bayer 04 Leverkusen 5:0 FC Schalke 04\n" + "Eintracht Frankfurt 2:1 FC Bayern München\n"
-			+ "Borussia Dortmund 1:0 FC Augsburg\n" + "Sport-Club Freiburg 3:1 1. FC Union Berlin\n"
-			+ "1. FC Küln 0:3 TSG Hoffenheim\n" + "VfL Wolfsburg 0:1 VfL Bochum 1848\n"
-			+ "VfB Stuttgart 0:3 RB Leipzig\n" + "Hertha BSC 5:2 Borussia Münchengladbach\n"
-			+ "1. FSV Mainz 05 1:1 SV Werder Bremen\n" + "VfB Stuttgart 0:2 Sport-Club Freiburg\n"
-			+ "Bayer 04 Leverkusen 2:5 RB Leipzig\n" + "Eintracht Frankfurt 1:2 VfL Bochum 1848\n"
-			+ "VfL Wolfsburg 4:4 Hertha BSC\n" + "Borussia Dortmund 4:0 1. FC Union Berlin\n"
-			+ "FC Augsburg 3:1 TSG Hoffenheim\n" + "FC Schalke 04 1:2 Borussia Münchengladbach\n"
-			+ "SV Werder Bremen 2:1 1. FC Küln";
+	private static final String TEST_BUNDESLIGA = """
+			Hertha BSC 4:3 1. FC Küln
+			VfL Wolfsburg 2:1 FC Augsburg
+			FC Schalke 04 2:2 TSG Hoffenheim
+			Borussia Münchengladbach 0:2 Sport-Club Freiburg
+			RB Leipzig 0:4 1. FSV Mainz 05
+			SV Werder Bremen 0:2 VfB Stuttgart
+			Borussia Dortmund 3:2 Eintracht Frankfurt
+			Bayer 04 Leverkusen 5:1 VfL Bochum 1848
+			FC Bayern München 1:1 1. FC Union Berlin
+			Borussia Münchengladbach 1:1 1. FC Union Berlin
+			FC Schalke 04 5:0 RB Leipzig
+			Eintracht Frankfurt 2:1 SV Werder Bremen
+			1. FC Küln 4:0 VfB Stuttgart
+			Sport-Club Freiburg 2:1 Borussia Dortmund
+			Bayer 04 Leverkusen 0:3 VfL Wolfsburg
+			Hertha BSC 0:1 1. FSV Mainz 05
+			FC Augsburg 2:2 FC Bayern München
+			VfL Bochum 1848 1:1 TSG Hoffenheim
+			Bayer 04 Leverkusen 1:5 Hertha BSC
+			VfB Stuttgart 1:5 1. FC Küln
+			Borussia Dortmund 2:3 RB Leipzig
+			TSG Hoffenheim 1:1 VfL Bochum 1848
+			Eintracht Frankfurt 0:2 1. FC Union Berlin
+			Sport-Club Freiburg 2:1 FC Schalke 04
+			VfL Wolfsburg 0:2 SV Werder Bremen
+			Borussia Münchengladbach 5:1 FC Augsburg
+			1. FSV Mainz 05 5:5 FC Bayern München
+			Borussia Münchengladbach 1:1 VfL Bochum 1848
+			RB Leipzig 1:5 VfL Wolfsburg
+			SV Werder Bremen 5:5 Borussia Dortmund
+			Bayer 04 Leverkusen 1:2 Sport-Club Freiburg
+			1. FC Union Berlin 2:2 FC Bayern München
+			1. FSV Mainz 05 1:0 1. FC Küln
+			Eintracht Frankfurt 3:0 FC Schalke 04
+			VfB Stuttgart 2:1 FC Augsburg
+			TSG Hoffenheim 4:0 Hertha BSC
+			VfL Wolfsburg 4:1 RB Leipzig
+			FC Augsburg 1:1 1. FC Küln
+			FC Bayern München 3:0 FC Schalke 04
+			Borussia Dortmund 3:0 TSG Hoffenheim
+			VfB Stuttgart 3:2 Borussia Münchengladbach
+			Hertha BSC 1:2 Bayer 04 Leverkusen
+			VfL Bochum 1848 2:0 1. FSV Mainz 05
+			Sport-Club Freiburg 2:2 SV Werder Bremen
+			1. FC Union Berlin 0:4 Eintracht Frankfurt
+			FC Schalke 04 0:0 VfB Stuttgart
+			1. FC Union Berlin 0:0 Hertha BSC
+			Eintracht Frankfurt 4:1 FC Bayern München
+			Sport-Club Freiburg 4:2 1. FC Küln
+			VfL Bochum 1848 1:1 Bayer 04 Leverkusen
+			1. FSV Mainz 05 3:1 RB Leipzig
+			FC Augsburg 0:0 TSG Hoffenheim
+			SV Werder Bremen 0:2 Borussia Münchengladbach
+			VfL Wolfsburg 2:1 Borussia Dortmund
+			VfL Bochum 1848 2:3 Borussia Münchengladbach
+			SV Werder Bremen 0:5 1. FC Küln
+			VfB Stuttgart 0:2 Borussia Dortmund
+			Eintracht Frankfurt 2:1 Sport-Club Freiburg
+			1. FC Union Berlin 2:3 Bayer 04 Leverkusen
+			FC Schalke 04 4:0 FC Bayern München
+			RB Leipzig 2:2 Hertha BSC
+			1. FSV Mainz 05 3:2 FC Augsburg
+			VfL Wolfsburg 3:3 TSG Hoffenheim
+			RB Leipzig 1:1 1. FC Küln
+			SV Werder Bremen 0:0 VfL Wolfsburg
+			FC Bayern München 4:0 1. FSV Mainz 05
+			VfB Stuttgart 3:3 FC Schalke 04
+			Hertha BSC 0:1 VfL Bochum 1848
+			1. FC Union Berlin 5:1 TSG Hoffenheim
+			Sport-Club Freiburg 3:1 Eintracht Frankfurt
+			FC Augsburg 0:2 Borussia Münchengladbach
+			Bayer 04 Leverkusen 1:1 Borussia Dortmund
+			FC Augsburg 1:1 SV Werder Bremen
+			VfB Stuttgart 2:3 1. FC Union Berlin
+			Eintracht Frankfurt 5:1 1. FSV Mainz 05
+			Borussia Dortmund 1:1 VfL Wolfsburg
+			FC Bayern München 4:4 Sport-Club Freiburg
+			Bayer 04 Leverkusen 2:1 FC Schalke 04
+			1. FC Küln 1:1 RB Leipzig
+			Hertha BSC 0:2 TSG Hoffenheim
+			1. FC Küln 5:3 Borussia Münchengladbach
+			VfB Stuttgart 1:0 Bayer 04 Leverkusen
+			Sport-Club Freiburg 0:5 FC Bayern München
+			1. FSV Mainz 05 1:2 Borussia Dortmund
+			RB Leipzig 2:2 Eintracht Frankfurt
+			SV Werder Bremen 0:4 TSG Hoffenheim
+			VfL Wolfsburg 2:0 FC Schalke 04
+			VfL Bochum 1848 5:0 Hertha BSC
+			1. FC Union Berlin 4:2 FC Augsburg
+			TSG Hoffenheim 5:5 1. FC Union Berlin
+			1. FC Küln 0:1 Sport-Club Freiburg
+			Eintracht Frankfurt 2:1 Borussia Dortmund
+			SV Werder Bremen 1:1 Hertha BSC
+			Borussia Münchengladbach 5:2 Bayer 04 Leverkusen
+			FC Bayern München 0:0 FC Augsburg
+			1. FSV Mainz 05 0:1 FC Schalke 04
+			RB Leipzig 2:2 VfL Bochum 1848
+			VfL Wolfsburg 0:0 VfB Stuttgart
+			Borussia Dortmund 0:4 Bayer 04 Leverkusen
+			VfB Stuttgart 2:3 Eintracht Frankfurt
+			RB Leipzig 1:4 1. FC Union Berlin
+			TSG Hoffenheim 4:4 VfL Wolfsburg
+			SV Werder Bremen 1:1 FC Schalke 04
+			FC Augsburg 4:5 Sport-Club Freiburg
+			FC Bayern München 0:1 Hertha BSC
+			Borussia Münchengladbach 2:0 1. FSV Mainz 05
+			VfL Bochum 1848 3:4 1. FC Küln
+			VfL Bochum 1848 2:2 RB Leipzig
+			VfB Stuttgart 1:0 SV Werder Bremen
+			TSG Hoffenheim 3:1 Borussia Münchengladbach
+			FC Schalke 04 1:0 1. FSV Mainz 05
+			VfL Wolfsburg 4:3 FC Bayern München
+			Sport-Club Freiburg 2:2 Bayer 04 Leverkusen
+			Eintracht Frankfurt 5:1 1. FC Küln
+			FC Augsburg 0:0 1. FC Union Berlin
+			Borussia Dortmund 1:3 Hertha BSC
+			FC Schalke 04 1:2 Hertha BSC
+			Sport-Club Freiburg 0:5 RB Leipzig
+			1. FC Küln 2:0 FC Bayern München
+			Bayer 04 Leverkusen 2:5 VfB Stuttgart
+			SV Werder Bremen 2:0 VfL Bochum 1848
+			Eintracht Frankfurt 0:0 FC Augsburg
+			Borussia Dortmund 0:1 1. FC Union Berlin
+			Borussia Münchengladbach 1:1 TSG Hoffenheim
+			1. FSV Mainz 05 0:1 VfL Wolfsburg
+			Hertha BSC 1:5 1. FC Union Berlin
+			FC Augsburg 4:1 RB Leipzig
+			FC Bayern München 2:1 Bayer 04 Leverkusen
+			Sport-Club Freiburg 1:0 Borussia Münchengladbach
+			1. FSV Mainz 05 5:0 VfL Bochum 1848
+			VfB Stuttgart 2:1 VfL Wolfsburg
+			FC Schalke 04 1:1 Borussia Dortmund
+			1. FC Küln 3:2 Eintracht Frankfurt
+			TSG Hoffenheim 0:3 SV Werder Bremen
+			FC Schalke 04 0:2 Bayer 04 Leverkusen
+			FC Bayern München 1:0 Eintracht Frankfurt
+			FC Augsburg 1:2 Borussia Dortmund
+			1. FC Union Berlin 0:4 Sport-Club Freiburg
+			TSG Hoffenheim 0:4 1. FC Küln
+			VfL Bochum 1848 2:1 VfL Wolfsburg
+			RB Leipzig 5:1 VfB Stuttgart
+			Borussia Münchengladbach 0:0 Hertha BSC
+			SV Werder Bremen 1:0 1. FSV Mainz 05
+			Sport-Club Freiburg 3:4 VfB Stuttgart
+			RB Leipzig 0:0 Bayer 04 Leverkusen
+			VfL Bochum 1848 1:1 Eintracht Frankfurt
+			Hertha BSC 1:2 VfL Wolfsburg
+			1. FC Union Berlin 0:0 Borussia Dortmund
+			TSG Hoffenheim 1:1 FC Augsburg
+			Borussia Münchengladbach 1:2 FC Schalke 04
+			1. FC Küln 0:1 SV Werder Bremen
+			1. FC Küln 2:0 Hertha BSC
+			FC Augsburg 2:1 VfL Wolfsburg
+			TSG Hoffenheim 1:1 FC Schalke 04
+			Sport-Club Freiburg 1:0 Borussia Münchengladbach
+			1. FSV Mainz 05 1:1 RB Leipzig
+			VfB Stuttgart 2:0 SV Werder Bremen
+			Eintracht Frankfurt 2:0 Borussia Dortmund
+			VfL Bochum 1848 1:5 Bayer 04 Leverkusen
+			1. FC Union Berlin 2:5 FC Bayern München
+			1. FC Union Berlin 0:2 Borussia Münchengladbach
+			RB Leipzig 1:3 FC Schalke 04
+			SV Werder Bremen 4:1 Eintracht Frankfurt
+			VfB Stuttgart 4:0 1. FC Küln
+			Borussia Dortmund 3:5 Sport-Club Freiburg
+			VfL Wolfsburg 0:2 Bayer 04 Leverkusen
+			1. FSV Mainz 05 1:1 Hertha BSC
+			FC Bayern München 2:2 FC Augsburg
+			TSG Hoffenheim 2:1 VfL Bochum 1848
+			Hertha BSC 1:2 Bayer 04 Leverkusen
+			1. FC Küln 1:0 VfB Stuttgart
+			RB Leipzig 4:2 Borussia Dortmund
+			VfL Bochum 1848 2:4 TSG Hoffenheim
+			1. FC Union Berlin 2:3 Eintracht Frankfurt
+			FC Schalke 04 2:2 Sport-Club Freiburg
+			SV Werder Bremen 0:5 VfL Wolfsburg
+			FC Augsburg 2:1 Borussia Münchengladbach
+			FC Bayern München 1:4 1. FSV Mainz 05
+			VfL Bochum 1848 3:3 Borussia Münchengladbach
+			VfL Wolfsburg 0:5 RB Leipzig
+			Borussia Dortmund 2:4 SV Werder Bremen
+			Sport-Club Freiburg 1:0 Bayer 04 Leverkusen
+			FC Bayern München 0:1 1. FC Union Berlin
+			1. FC Küln 4:3 1. FSV Mainz 05
+			FC Schalke 04 0:2 Eintracht Frankfurt
+			FC Augsburg 1:0 VfB Stuttgart
+			Hertha BSC 2:0 TSG Hoffenheim
+			RB Leipzig 1:5 VfL Wolfsburg
+			1. FC Küln 2:4 FC Augsburg
+			FC Schalke 04 1:0 FC Bayern München
+			TSG Hoffenheim 1:0 Borussia Dortmund
+			Borussia Münchengladbach 1:1 VfB Stuttgart
+			Bayer 04 Leverkusen 2:0 Hertha BSC
+			1. FSV Mainz 05 0:2 VfL Bochum 1848
+			SV Werder Bremen 4:5 Sport-Club Freiburg
+			Eintracht Frankfurt 0:2 1. FC Union Berlin
+			VfB Stuttgart 1:1 FC Schalke 04
+			Hertha BSC 2:2 1. FC Union Berlin
+			FC Bayern München 1:1 Eintracht Frankfurt
+			1. FC Küln 2:1 Sport-Club Freiburg
+			Bayer 04 Leverkusen 2:0 VfL Bochum 1848
+			RB Leipzig 1:1 1. FSV Mainz 05
+			TSG Hoffenheim 3:0 FC Augsburg
+			Borussia Münchengladbach 4:1 SV Werder Bremen
+			Borussia Dortmund 4:5 VfL Wolfsburg
+			Borussia Münchengladbach 2:0 VfL Bochum 1848
+			1. FC Küln 3:3 SV Werder Bremen
+			Borussia Dortmund 0:2 VfB Stuttgart
+			Sport-Club Freiburg 2:0 Eintracht Frankfurt
+			Bayer 04 Leverkusen 5:2 1. FC Union Berlin
+			FC Bayern München 5:2 FC Schalke 04
+			Hertha BSC 3:0 RB Leipzig
+			FC Augsburg 0:2 1. FSV Mainz 05
+			TSG Hoffenheim 5:2 VfL Wolfsburg
+			1. FC Küln 3:1 RB Leipzig
+			VfL Wolfsburg 0:1 SV Werder Bremen
+			1. FSV Mainz 05 5:1 FC Bayern München
+			FC Schalke 04 1:0 VfB Stuttgart
+			VfL Bochum 1848 3:5 Hertha BSC
+			TSG Hoffenheim 0:1 1. FC Union Berlin
+			Eintracht Frankfurt 2:4 Sport-Club Freiburg
+			Borussia Münchengladbach 2:0 FC Augsburg
+			Borussia Dortmund 1:2 Bayer 04 Leverkusen
+			SV Werder Bremen 0:4 FC Augsburg
+			1. FC Union Berlin 1:4 VfB Stuttgart
+			1. FSV Mainz 05 5:5 Eintracht Frankfurt
+			VfL Wolfsburg 0:2 Borussia Dortmund
+			Sport-Club Freiburg 3:5 FC Bayern München
+			FC Schalke 04 4:1 Bayer 04 Leverkusen
+			RB Leipzig 0:1 1. FC Küln
+			TSG Hoffenheim 3:5 Hertha BSC
+			Borussia Münchengladbach 1:1 1. FC Küln
+			Bayer 04 Leverkusen 0:5 VfB Stuttgart
+			FC Bayern München 0:2 Sport-Club Freiburg
+			Borussia Dortmund 1:1 1. FSV Mainz 05
+			Eintracht Frankfurt 1:1 RB Leipzig
+			TSG Hoffenheim 1:1 SV Werder Bremen
+			FC Schalke 04 2:2 VfL Wolfsburg
+			Hertha BSC 2:5 VfL Bochum 1848
+			FC Augsburg 0:1 1. FC Union Berlin
+			1. FC Union Berlin 1:2 TSG Hoffenheim
+			Sport-Club Freiburg 5:3 1. FC Küln
+			Borussia Dortmund 4:0 Eintracht Frankfurt
+			Hertha BSC 4:0 SV Werder Bremen
+			Bayer 04 Leverkusen 2:2 Borussia Münchengladbach
+			FC Augsburg 2:0 FC Bayern München
+			FC Schalke 04 2:1 1. FSV Mainz 05
+			VfL Bochum 1848 4:4 RB Leipzig
+			VfB Stuttgart 0:1 VfL Wolfsburg
+			Bayer 04 Leverkusen 1:1 Borussia Dortmund
+			Eintracht Frankfurt 1:1 VfB Stuttgart
+			1. FC Union Berlin 2:1 RB Leipzig
+			VfL Wolfsburg 3:1 TSG Hoffenheim
+			FC Schalke 04 1:3 SV Werder Bremen
+			Sport-Club Freiburg 0:3 FC Augsburg
+			Hertha BSC 5:4 FC Bayern München
+			1. FSV Mainz 05 2:3 Borussia Münchengladbach
+			1. FC Küln 1:0 VfL Bochum 1848
+			RB Leipzig 4:5 VfL Bochum 1848
+			SV Werder Bremen 0:4 VfB Stuttgart
+			Borussia Münchengladbach 4:1 TSG Hoffenheim
+			1. FSV Mainz 05 2:0 FC Schalke 04
+			FC Bayern München 0:5 VfL Wolfsburg
+			Bayer 04 Leverkusen 2:2 Sport-Club Freiburg
+			1. FC Küln 2:2 Eintracht Frankfurt
+			1. FC Union Berlin 1:5 FC Augsburg
+			Hertha BSC 3:3 Borussia Dortmund
+			Hertha BSC 4:1 FC Schalke 04
+			RB Leipzig 3:0 Sport-Club Freiburg
+			FC Bayern München 2:1 1. FC Küln
+			VfB Stuttgart 0:1 Bayer 04 Leverkusen
+			VfL Bochum 1848 5:2 SV Werder Bremen
+			FC Augsburg 0:0 Eintracht Frankfurt
+			1. FC Union Berlin 1:1 Borussia Dortmund
+			TSG Hoffenheim 3:2 Borussia Münchengladbach
+			VfL Wolfsburg 1:4 1. FSV Mainz 05
+			1. FC Union Berlin 0:4 Hertha BSC
+			RB Leipzig 1:1 FC Augsburg
+			Bayer 04 Leverkusen 1:1 FC Bayern München
+			Borussia Münchengladbach 5:0 Sport-Club Freiburg
+			VfL Bochum 1848 5:2 1. FSV Mainz 05
+			VfL Wolfsburg 0:1 VfB Stuttgart
+			Borussia Dortmund 1:5 FC Schalke 04
+			Eintracht Frankfurt 1:2 1. FC Küln
+			SV Werder Bremen 2:1 TSG Hoffenheim
+			Bayer 04 Leverkusen 5:0 FC Schalke 04
+			Eintracht Frankfurt 2:1 FC Bayern München
+			Borussia Dortmund 1:0 FC Augsburg
+			Sport-Club Freiburg 3:1 1. FC Union Berlin
+			1. FC Küln 0:3 TSG Hoffenheim
+			VfL Wolfsburg 0:1 VfL Bochum 1848
+			VfB Stuttgart 0:3 RB Leipzig
+			Hertha BSC 5:2 Borussia Münchengladbach
+			1. FSV Mainz 05 1:1 SV Werder Bremen
+			VfB Stuttgart 0:2 Sport-Club Freiburg
+			Bayer 04 Leverkusen 2:5 RB Leipzig
+			Eintracht Frankfurt 1:2 VfL Bochum 1848
+			VfL Wolfsburg 4:4 Hertha BSC
+			Borussia Dortmund 4:0 1. FC Union Berlin
+			FC Augsburg 3:1 TSG Hoffenheim
+			FC Schalke 04 1:2 Borussia Münchengladbach
+			SV Werder Bremen 2:1 1. FC Küln\
+			""";
 
-	private static final String TEST_BUNDESLIGA_EQUAL = "Hertha BSC 0:0 1. FC Küln\n"
-			+ "VfL Wolfsburg 0:0 FC Augsburg\n" + "FC Schalke 04 0:0 TSG Hoffenheim\n"
-			+ "Borussia Münchengladbach 0:0 Sport-Club Freiburg\n" + "RB Leipzig 0:0 1. FSV Mainz 05\n"
-			+ "SV Werder Bremen 0:0 VfB Stuttgart\n" + "Borussia Dortmund 0:0 Eintracht Frankfurt\n"
-			+ "Bayer 04 Leverkusen 0:0 VfL Bochum 1848\n" + "FC Bayern München 0:0 1. FC Union Berlin\n"
-			+ "Borussia Münchengladbach 0:0 1. FC Union Berlin\n" + "FC Schalke 04 0:0 RB Leipzig\n"
-			+ "Eintracht Frankfurt 0:0 SV Werder Bremen\n" + "1. FC Küln 0:0 VfB Stuttgart\n"
-			+ "Sport-Club Freiburg 0:0 Borussia Dortmund\n" + "Bayer 04 Leverkusen 0:0 VfL Wolfsburg\n"
-			+ "Hertha BSC 0:0 1. FSV Mainz 05\n" + "FC Augsburg 0:0 FC Bayern München\n"
-			+ "VfL Bochum 1848 0:0 TSG Hoffenheim\n" + "Bayer 04 Leverkusen 0:0 Hertha BSC\n"
-			+ "VfB Stuttgart 0:0 1. FC Küln\n" + "Borussia Dortmund 0:0 RB Leipzig\n"
-			+ "TSG Hoffenheim 0:0 VfL Bochum 1848\n" + "Eintracht Frankfurt 0:0 1. FC Union Berlin\n"
-			+ "Sport-Club Freiburg 0:0 FC Schalke 04\n" + "VfL Wolfsburg 0:0 SV Werder Bremen\n"
-			+ "Borussia Münchengladbach 0:0 FC Augsburg\n" + "1. FSV Mainz 05 0:0 FC Bayern München\n"
-			+ "Borussia Münchengladbach 0:0 VfL Bochum 1848\n" + "RB Leipzig 0:0 VfL Wolfsburg\n"
-			+ "SV Werder Bremen 0:0 Borussia Dortmund\n" + "Bayer 04 Leverkusen 0:0 Sport-Club Freiburg\n"
-			+ "1. FC Union Berlin 0:0 FC Bayern München\n" + "1. FSV Mainz 05 0:0 1. FC Küln\n"
-			+ "Eintracht Frankfurt 0:0 FC Schalke 04\n" + "VfB Stuttgart 0:0 FC Augsburg\n"
-			+ "TSG Hoffenheim 0:0 Hertha BSC\n" + "VfL Wolfsburg 0:0 RB Leipzig\n" + "FC Augsburg 0:0 1. FC Küln\n"
-			+ "FC Bayern München 0:0 FC Schalke 04\n" + "Borussia Dortmund 0:0 TSG Hoffenheim\n"
-			+ "VfB Stuttgart 0:0 Borussia Münchengladbach\n" + "Hertha BSC 0:0 Bayer 04 Leverkusen\n"
-			+ "VfL Bochum 1848 0:0 1. FSV Mainz 05\n" + "Sport-Club Freiburg 0:0 SV Werder Bremen\n"
-			+ "1. FC Union Berlin 0:0 Eintracht Frankfurt\n" + "FC Schalke 04 0:0 VfB Stuttgart\n"
-			+ "1. FC Union Berlin 0:0 Hertha BSC\n" + "Eintracht Frankfurt 0:0 FC Bayern München\n"
-			+ "Sport-Club Freiburg 0:0 1. FC Küln\n" + "VfL Bochum 1848 0:0 Bayer 04 Leverkusen\n"
-			+ "1. FSV Mainz 05 0:0 RB Leipzig\n" + "FC Augsburg 0:0 TSG Hoffenheim\n"
-			+ "SV Werder Bremen 0:0 Borussia Münchengladbach\n" + "VfL Wolfsburg 0:0 Borussia Dortmund\n"
-			+ "VfL Bochum 1848 0:0 Borussia Münchengladbach\n" + "SV Werder Bremen 0:0 1. FC Küln\n"
-			+ "VfB Stuttgart 0:0 Borussia Dortmund\n" + "Eintracht Frankfurt 0:0 Sport-Club Freiburg\n"
-			+ "1. FC Union Berlin 0:0 Bayer 04 Leverkusen\n" + "FC Schalke 04 0:0 FC Bayern München\n"
-			+ "RB Leipzig 0:0 Hertha BSC\n" + "1. FSV Mainz 05 0:0 FC Augsburg\n" + "VfL Wolfsburg 0:0 TSG Hoffenheim\n"
-			+ "RB Leipzig 0:0 1. FC Küln\n" + "SV Werder Bremen 0:0 VfL Wolfsburg\n"
-			+ "FC Bayern München 0:0 1. FSV Mainz 05\n" + "VfB Stuttgart 0:0 FC Schalke 04\n"
-			+ "Hertha BSC 0:0 VfL Bochum 1848\n" + "1. FC Union Berlin 0:0 TSG Hoffenheim\n"
-			+ "Sport-Club Freiburg 0:0 Eintracht Frankfurt\n" + "FC Augsburg 0:0 Borussia Münchengladbach\n"
-			+ "Bayer 04 Leverkusen 0:0 Borussia Dortmund\n" + "FC Augsburg 0:0 SV Werder Bremen\n"
-			+ "VfB Stuttgart 0:0 1. FC Union Berlin\n" + "Eintracht Frankfurt 0:0 1. FSV Mainz 05\n"
-			+ "Borussia Dortmund 0:0 VfL Wolfsburg\n" + "FC Bayern München 0:0 Sport-Club Freiburg\n"
-			+ "Bayer 04 Leverkusen 0:0 FC Schalke 04\n" + "1. FC Küln 0:0 RB Leipzig\n"
-			+ "Hertha BSC 0:0 TSG Hoffenheim\n" + "1. FC Küln 0:0 Borussia Münchengladbach\n"
-			+ "VfB Stuttgart 0:0 Bayer 04 Leverkusen\n" + "Sport-Club Freiburg 0:0 FC Bayern München\n"
-			+ "1. FSV Mainz 05 0:0 Borussia Dortmund\n" + "RB Leipzig 0:0 Eintracht Frankfurt\n"
-			+ "SV Werder Bremen 0:0 TSG Hoffenheim\n" + "VfL Wolfsburg 0:0 FC Schalke 04\n"
-			+ "VfL Bochum 1848 0:0 Hertha BSC\n" + "1. FC Union Berlin 0:0 FC Augsburg\n"
-			+ "TSG Hoffenheim 0:0 1. FC Union Berlin\n" + "1. FC Küln 0:0 Sport-Club Freiburg\n"
-			+ "Eintracht Frankfurt 0:0 Borussia Dortmund\n" + "SV Werder Bremen 0:0 Hertha BSC\n"
-			+ "Borussia Münchengladbach 0:0 Bayer 04 Leverkusen\n" + "FC Bayern München 0:0 FC Augsburg\n"
-			+ "1. FSV Mainz 05 0:0 FC Schalke 04\n" + "RB Leipzig 0:0 VfL Bochum 1848\n"
-			+ "VfL Wolfsburg 0:0 VfB Stuttgart\n" + "Borussia Dortmund 0:0 Bayer 04 Leverkusen\n"
-			+ "VfB Stuttgart 0:0 Eintracht Frankfurt\n" + "RB Leipzig 0:0 1. FC Union Berlin\n"
-			+ "TSG Hoffenheim 0:0 VfL Wolfsburg\n" + "SV Werder Bremen 0:0 FC Schalke 04\n"
-			+ "FC Augsburg 0:0 Sport-Club Freiburg\n" + "FC Bayern München 0:0 Hertha BSC\n"
-			+ "Borussia Münchengladbach 0:0 1. FSV Mainz 05\n" + "VfL Bochum 1848 0:0 1. FC Küln\n"
-			+ "VfL Bochum 1848 0:0 RB Leipzig\n" + "VfB Stuttgart 0:0 SV Werder Bremen\n"
-			+ "TSG Hoffenheim 0:0 Borussia Münchengladbach\n" + "FC Schalke 04 0:0 1. FSV Mainz 05\n"
-			+ "VfL Wolfsburg 0:0 FC Bayern München\n" + "Sport-Club Freiburg 0:0 Bayer 04 Leverkusen\n"
-			+ "Eintracht Frankfurt 0:0 1. FC Küln\n" + "FC Augsburg 0:0 1. FC Union Berlin\n"
-			+ "Borussia Dortmund 0:0 Hertha BSC\n" + "FC Schalke 04 0:0 Hertha BSC\n"
-			+ "Sport-Club Freiburg 0:0 RB Leipzig\n" + "1. FC Küln 0:0 FC Bayern München\n"
-			+ "Bayer 04 Leverkusen 0:0 VfB Stuttgart\n" + "SV Werder Bremen 0:0 VfL Bochum 1848\n"
-			+ "Eintracht Frankfurt 0:0 FC Augsburg\n" + "Borussia Dortmund 0:0 1. FC Union Berlin\n"
-			+ "Borussia Münchengladbach 0:0 TSG Hoffenheim\n" + "1. FSV Mainz 05 0:0 VfL Wolfsburg\n"
-			+ "Hertha BSC 0:0 1. FC Union Berlin\n" + "FC Augsburg 0:0 RB Leipzig\n"
-			+ "FC Bayern München 0:0 Bayer 04 Leverkusen\n" + "Sport-Club Freiburg 0:0 Borussia Münchengladbach\n"
-			+ "1. FSV Mainz 05 0:0 VfL Bochum 1848\n" + "VfB Stuttgart 0:0 VfL Wolfsburg\n"
-			+ "FC Schalke 04 0:0 Borussia Dortmund\n" + "1. FC Küln 0:0 Eintracht Frankfurt\n"
-			+ "TSG Hoffenheim 0:0 SV Werder Bremen\n" + "FC Schalke 04 0:0 Bayer 04 Leverkusen\n"
-			+ "FC Bayern München 0:0 Eintracht Frankfurt\n" + "FC Augsburg 0:0 Borussia Dortmund\n"
-			+ "1. FC Union Berlin 0:0 Sport-Club Freiburg\n" + "TSG Hoffenheim 0:0 1. FC Küln\n"
-			+ "VfL Bochum 1848 0:0 VfL Wolfsburg\n" + "RB Leipzig 0:0 VfB Stuttgart\n"
-			+ "Borussia Münchengladbach 0:0 Hertha BSC\n" + "SV Werder Bremen 0:0 1. FSV Mainz 05\n"
-			+ "Sport-Club Freiburg 0:0 VfB Stuttgart\n" + "RB Leipzig 0:0 Bayer 04 Leverkusen\n"
-			+ "VfL Bochum 1848 0:0 Eintracht Frankfurt\n" + "Hertha BSC 0:0 VfL Wolfsburg\n"
-			+ "1. FC Union Berlin 0:0 Borussia Dortmund\n" + "TSG Hoffenheim 0:0 FC Augsburg\n"
-			+ "Borussia Münchengladbach 0:0 FC Schalke 04\n" + "1. FC Küln 0:0 SV Werder Bremen\n"
-			+ "1. FC Küln 0:0 Hertha BSC\n" + "FC Augsburg 0:0 VfL Wolfsburg\n" + "TSG Hoffenheim 0:0 FC Schalke 04\n"
-			+ "Sport-Club Freiburg 0:0 Borussia Münchengladbach\n" + "1. FSV Mainz 05 0:0 RB Leipzig\n"
-			+ "VfB Stuttgart 0:0 SV Werder Bremen\n" + "Eintracht Frankfurt 0:0 Borussia Dortmund\n"
-			+ "VfL Bochum 1848 0:0 Bayer 04 Leverkusen\n" + "1. FC Union Berlin 0:0 FC Bayern München\n"
-			+ "1. FC Union Berlin 0:0 Borussia Münchengladbach\n" + "RB Leipzig 0:0 FC Schalke 04\n"
-			+ "SV Werder Bremen 0:0 Eintracht Frankfurt\n" + "VfB Stuttgart 0:0 1. FC Küln\n"
-			+ "Borussia Dortmund 0:0 Sport-Club Freiburg\n" + "VfL Wolfsburg 0:0 Bayer 04 Leverkusen\n"
-			+ "1. FSV Mainz 05 0:0 Hertha BSC\n" + "FC Bayern München 0:0 FC Augsburg\n"
-			+ "TSG Hoffenheim 0:0 VfL Bochum 1848\n" + "Hertha BSC 0:0 Bayer 04 Leverkusen\n"
-			+ "1. FC Küln 0:0 VfB Stuttgart\n" + "RB Leipzig 0:0 Borussia Dortmund\n"
-			+ "VfL Bochum 1848 0:0 TSG Hoffenheim\n" + "1. FC Union Berlin 0:0 Eintracht Frankfurt\n"
-			+ "FC Schalke 04 0:0 Sport-Club Freiburg\n" + "SV Werder Bremen 0:0 VfL Wolfsburg\n"
-			+ "FC Augsburg 0:0 Borussia Münchengladbach\n" + "FC Bayern München 0:0 1. FSV Mainz 05\n"
-			+ "VfL Bochum 1848 0:0 Borussia Münchengladbach\n" + "VfL Wolfsburg 0:0 RB Leipzig\n"
-			+ "Borussia Dortmund 0:0 SV Werder Bremen\n" + "Sport-Club Freiburg 0:0 Bayer 04 Leverkusen\n"
-			+ "FC Bayern München 0:0 1. FC Union Berlin\n" + "1. FC Küln 0:0 1. FSV Mainz 05\n"
-			+ "FC Schalke 04 0:0 Eintracht Frankfurt\n" + "FC Augsburg 0:0 VfB Stuttgart\n"
-			+ "Hertha BSC 0:0 TSG Hoffenheim\n" + "RB Leipzig 0:0 VfL Wolfsburg\n" + "1. FC Küln 0:0 FC Augsburg\n"
-			+ "FC Schalke 04 0:0 FC Bayern München\n" + "TSG Hoffenheim 0:0 Borussia Dortmund\n"
-			+ "Borussia Münchengladbach 0:0 VfB Stuttgart\n" + "Bayer 04 Leverkusen 0:0 Hertha BSC\n"
-			+ "1. FSV Mainz 05 0:0 VfL Bochum 1848\n" + "SV Werder Bremen 0:0 Sport-Club Freiburg\n"
-			+ "Eintracht Frankfurt 0:0 1. FC Union Berlin\n" + "VfB Stuttgart 0:0 FC Schalke 04\n"
-			+ "Hertha BSC 0:0 1. FC Union Berlin\n" + "FC Bayern München 0:0 Eintracht Frankfurt\n"
-			+ "1. FC Küln 0:0 Sport-Club Freiburg\n" + "Bayer 04 Leverkusen 0:0 VfL Bochum 1848\n"
-			+ "RB Leipzig 0:0 1. FSV Mainz 05\n" + "TSG Hoffenheim 0:0 FC Augsburg\n"
-			+ "Borussia Münchengladbach 0:0 SV Werder Bremen\n" + "Borussia Dortmund 0:0 VfL Wolfsburg\n"
-			+ "Borussia Münchengladbach 0:0 VfL Bochum 1848\n" + "1. FC Küln 0:0 SV Werder Bremen\n"
-			+ "Borussia Dortmund 0:0 VfB Stuttgart\n" + "Sport-Club Freiburg 0:0 Eintracht Frankfurt\n"
-			+ "Bayer 04 Leverkusen 0:0 1. FC Union Berlin\n" + "FC Bayern München 0:0 FC Schalke 04\n"
-			+ "Hertha BSC 0:0 RB Leipzig\n" + "FC Augsburg 0:0 1. FSV Mainz 05\n" + "TSG Hoffenheim 0:0 VfL Wolfsburg\n"
-			+ "1. FC Küln 0:0 RB Leipzig\n" + "VfL Wolfsburg 0:0 SV Werder Bremen\n"
-			+ "1. FSV Mainz 05 0:0 FC Bayern München\n" + "FC Schalke 04 0:0 VfB Stuttgart\n"
-			+ "VfL Bochum 1848 0:0 Hertha BSC\n" + "TSG Hoffenheim 0:0 1. FC Union Berlin\n"
-			+ "Eintracht Frankfurt 0:0 Sport-Club Freiburg\n" + "Borussia Münchengladbach 0:0 FC Augsburg\n"
-			+ "Borussia Dortmund 0:0 Bayer 04 Leverkusen\n" + "SV Werder Bremen 0:0 FC Augsburg\n"
-			+ "1. FC Union Berlin 0:0 VfB Stuttgart\n" + "1. FSV Mainz 05 0:0 Eintracht Frankfurt\n"
-			+ "VfL Wolfsburg 0:0 Borussia Dortmund\n" + "Sport-Club Freiburg 0:0 FC Bayern München\n"
-			+ "FC Schalke 04 0:0 Bayer 04 Leverkusen\n" + "RB Leipzig 0:0 1. FC Küln\n"
-			+ "TSG Hoffenheim 0:0 Hertha BSC\n" + "Borussia Münchengladbach 0:0 1. FC Küln\n"
-			+ "Bayer 04 Leverkusen 0:0 VfB Stuttgart\n" + "FC Bayern München 0:0 Sport-Club Freiburg\n"
-			+ "Borussia Dortmund 0:0 1. FSV Mainz 05\n" + "Eintracht Frankfurt 0:0 RB Leipzig\n"
-			+ "TSG Hoffenheim 0:0 SV Werder Bremen\n" + "FC Schalke 04 0:0 VfL Wolfsburg\n"
-			+ "Hertha BSC 0:0 VfL Bochum 1848\n" + "FC Augsburg 0:0 1. FC Union Berlin\n"
-			+ "1. FC Union Berlin 0:0 TSG Hoffenheim\n" + "Sport-Club Freiburg 0:0 1. FC Küln\n"
-			+ "Borussia Dortmund 0:0 Eintracht Frankfurt\n" + "Hertha BSC 0:0 SV Werder Bremen\n"
-			+ "Bayer 04 Leverkusen 0:0 Borussia Münchengladbach\n" + "FC Augsburg 0:0 FC Bayern München\n"
-			+ "FC Schalke 04 0:0 1. FSV Mainz 05\n" + "VfL Bochum 1848 0:0 RB Leipzig\n"
-			+ "VfB Stuttgart 0:0 VfL Wolfsburg\n" + "Bayer 04 Leverkusen 0:0 Borussia Dortmund\n"
-			+ "Eintracht Frankfurt 0:0 VfB Stuttgart\n" + "1. FC Union Berlin 0:0 RB Leipzig\n"
-			+ "VfL Wolfsburg 0:0 TSG Hoffenheim\n" + "FC Schalke 04 0:0 SV Werder Bremen\n"
-			+ "Sport-Club Freiburg 0:0 FC Augsburg\n" + "Hertha BSC 0:0 FC Bayern München\n"
-			+ "1. FSV Mainz 05 0:0 Borussia Münchengladbach\n" + "1. FC Küln 0:0 VfL Bochum 1848\n"
-			+ "RB Leipzig 0:0 VfL Bochum 1848\n" + "SV Werder Bremen 0:0 VfB Stuttgart\n"
-			+ "Borussia Münchengladbach 0:0 TSG Hoffenheim\n" + "1. FSV Mainz 05 0:0 FC Schalke 04\n"
-			+ "FC Bayern München 0:0 VfL Wolfsburg\n" + "Bayer 04 Leverkusen 0:0 Sport-Club Freiburg\n"
-			+ "1. FC Küln 0:0 Eintracht Frankfurt\n" + "1. FC Union Berlin 0:0 FC Augsburg\n"
-			+ "Hertha BSC 0:0 Borussia Dortmund\n" + "Hertha BSC 0:0 FC Schalke 04\n"
-			+ "RB Leipzig 0:0 Sport-Club Freiburg\n" + "FC Bayern München 0:0 1. FC Küln\n"
-			+ "VfB Stuttgart 0:0 Bayer 04 Leverkusen\n" + "VfL Bochum 1848 0:0 SV Werder Bremen\n"
-			+ "FC Augsburg 0:0 Eintracht Frankfurt\n" + "1. FC Union Berlin 0:0 Borussia Dortmund\n"
-			+ "TSG Hoffenheim 0:0 Borussia Münchengladbach\n" + "VfL Wolfsburg 0:0 1. FSV Mainz 05\n"
-			+ "1. FC Union Berlin 0:0 Hertha BSC\n" + "RB Leipzig 0:0 FC Augsburg\n"
-			+ "Bayer 04 Leverkusen 0:0 FC Bayern München\n" + "Borussia Münchengladbach 0:0 Sport-Club Freiburg\n"
-			+ "VfL Bochum 1848 0:0 1. FSV Mainz 05\n" + "VfL Wolfsburg 0:0 VfB Stuttgart\n"
-			+ "Borussia Dortmund 0:0 FC Schalke 04\n" + "Eintracht Frankfurt 0:0 1. FC Küln\n"
-			+ "SV Werder Bremen 0:0 TSG Hoffenheim\n" + "Bayer 04 Leverkusen 0:0 FC Schalke 04\n"
-			+ "Eintracht Frankfurt 0:0 FC Bayern München\n" + "Borussia Dortmund 0:0 FC Augsburg\n"
-			+ "Sport-Club Freiburg 0:0 1. FC Union Berlin\n" + "1. FC Küln 0:0 TSG Hoffenheim\n"
-			+ "VfL Wolfsburg 0:0 VfL Bochum 1848\n" + "VfB Stuttgart 0:0 RB Leipzig\n"
-			+ "Hertha BSC 0:0 Borussia Münchengladbach\n" + "1. FSV Mainz 05 0:0 SV Werder Bremen\n"
-			+ "VfB Stuttgart 0:0 Sport-Club Freiburg\n" + "Bayer 04 Leverkusen 0:0 RB Leipzig\n"
-			+ "Eintracht Frankfurt 0:0 VfL Bochum 1848\n" + "VfL Wolfsburg 0:0 Hertha BSC\n"
-			+ "Borussia Dortmund 0:0 1. FC Union Berlin\n" + "FC Augsburg 0:0 TSG Hoffenheim\n"
-			+ "FC Schalke 04 0:0 Borussia Münchengladbach\n" + "SV Werder Bremen 0:0 1. FC Küln\n"
-			+ "1. FSV Mainz 05 0:0 Borussia Münchengladbach\n" + "Borussia Münchengladbach 0:0 FC Bayern München\n"
-			+ "FC Bayern München 0:0 VfL Bochum 1848\n" + "VfL Bochum 1848 0:0 1. FSV Mainz 05";
+	private static final String TEST_BUNDESLIGA_EQUAL = """
+			Hertha BSC 0:0 1. FC Küln
+			VfL Wolfsburg 0:0 FC Augsburg
+			FC Schalke 04 0:0 TSG Hoffenheim
+			Borussia Münchengladbach 0:0 Sport-Club Freiburg
+			RB Leipzig 0:0 1. FSV Mainz 05
+			SV Werder Bremen 0:0 VfB Stuttgart
+			Borussia Dortmund 0:0 Eintracht Frankfurt
+			Bayer 04 Leverkusen 0:0 VfL Bochum 1848
+			FC Bayern München 0:0 1. FC Union Berlin
+			Borussia Münchengladbach 0:0 1. FC Union Berlin
+			FC Schalke 04 0:0 RB Leipzig
+			Eintracht Frankfurt 0:0 SV Werder Bremen
+			1. FC Küln 0:0 VfB Stuttgart
+			Sport-Club Freiburg 0:0 Borussia Dortmund
+			Bayer 04 Leverkusen 0:0 VfL Wolfsburg
+			Hertha BSC 0:0 1. FSV Mainz 05
+			FC Augsburg 0:0 FC Bayern München
+			VfL Bochum 1848 0:0 TSG Hoffenheim
+			Bayer 04 Leverkusen 0:0 Hertha BSC
+			VfB Stuttgart 0:0 1. FC Küln
+			Borussia Dortmund 0:0 RB Leipzig
+			TSG Hoffenheim 0:0 VfL Bochum 1848
+			Eintracht Frankfurt 0:0 1. FC Union Berlin
+			Sport-Club Freiburg 0:0 FC Schalke 04
+			VfL Wolfsburg 0:0 SV Werder Bremen
+			Borussia Münchengladbach 0:0 FC Augsburg
+			1. FSV Mainz 05 0:0 FC Bayern München
+			Borussia Münchengladbach 0:0 VfL Bochum 1848
+			RB Leipzig 0:0 VfL Wolfsburg
+			SV Werder Bremen 0:0 Borussia Dortmund
+			Bayer 04 Leverkusen 0:0 Sport-Club Freiburg
+			1. FC Union Berlin 0:0 FC Bayern München
+			1. FSV Mainz 05 0:0 1. FC Küln
+			Eintracht Frankfurt 0:0 FC Schalke 04
+			VfB Stuttgart 0:0 FC Augsburg
+			TSG Hoffenheim 0:0 Hertha BSC
+			VfL Wolfsburg 0:0 RB Leipzig
+			FC Augsburg 0:0 1. FC Küln
+			FC Bayern München 0:0 FC Schalke 04
+			Borussia Dortmund 0:0 TSG Hoffenheim
+			VfB Stuttgart 0:0 Borussia Münchengladbach
+			Hertha BSC 0:0 Bayer 04 Leverkusen
+			VfL Bochum 1848 0:0 1. FSV Mainz 05
+			Sport-Club Freiburg 0:0 SV Werder Bremen
+			1. FC Union Berlin 0:0 Eintracht Frankfurt
+			FC Schalke 04 0:0 VfB Stuttgart
+			1. FC Union Berlin 0:0 Hertha BSC
+			Eintracht Frankfurt 0:0 FC Bayern München
+			Sport-Club Freiburg 0:0 1. FC Küln
+			VfL Bochum 1848 0:0 Bayer 04 Leverkusen
+			1. FSV Mainz 05 0:0 RB Leipzig
+			FC Augsburg 0:0 TSG Hoffenheim
+			SV Werder Bremen 0:0 Borussia Münchengladbach
+			VfL Wolfsburg 0:0 Borussia Dortmund
+			VfL Bochum 1848 0:0 Borussia Münchengladbach
+			SV Werder Bremen 0:0 1. FC Küln
+			VfB Stuttgart 0:0 Borussia Dortmund
+			Eintracht Frankfurt 0:0 Sport-Club Freiburg
+			1. FC Union Berlin 0:0 Bayer 04 Leverkusen
+			FC Schalke 04 0:0 FC Bayern München
+			RB Leipzig 0:0 Hertha BSC
+			1. FSV Mainz 05 0:0 FC Augsburg
+			VfL Wolfsburg 0:0 TSG Hoffenheim
+			RB Leipzig 0:0 1. FC Küln
+			SV Werder Bremen 0:0 VfL Wolfsburg
+			FC Bayern München 0:0 1. FSV Mainz 05
+			VfB Stuttgart 0:0 FC Schalke 04
+			Hertha BSC 0:0 VfL Bochum 1848
+			1. FC Union Berlin 0:0 TSG Hoffenheim
+			Sport-Club Freiburg 0:0 Eintracht Frankfurt
+			FC Augsburg 0:0 Borussia Münchengladbach
+			Bayer 04 Leverkusen 0:0 Borussia Dortmund
+			FC Augsburg 0:0 SV Werder Bremen
+			VfB Stuttgart 0:0 1. FC Union Berlin
+			Eintracht Frankfurt 0:0 1. FSV Mainz 05
+			Borussia Dortmund 0:0 VfL Wolfsburg
+			FC Bayern München 0:0 Sport-Club Freiburg
+			Bayer 04 Leverkusen 0:0 FC Schalke 04
+			1. FC Küln 0:0 RB Leipzig
+			Hertha BSC 0:0 TSG Hoffenheim
+			1. FC Küln 0:0 Borussia Münchengladbach
+			VfB Stuttgart 0:0 Bayer 04 Leverkusen
+			Sport-Club Freiburg 0:0 FC Bayern München
+			1. FSV Mainz 05 0:0 Borussia Dortmund
+			RB Leipzig 0:0 Eintracht Frankfurt
+			SV Werder Bremen 0:0 TSG Hoffenheim
+			VfL Wolfsburg 0:0 FC Schalke 04
+			VfL Bochum 1848 0:0 Hertha BSC
+			1. FC Union Berlin 0:0 FC Augsburg
+			TSG Hoffenheim 0:0 1. FC Union Berlin
+			1. FC Küln 0:0 Sport-Club Freiburg
+			Eintracht Frankfurt 0:0 Borussia Dortmund
+			SV Werder Bremen 0:0 Hertha BSC
+			Borussia Münchengladbach 0:0 Bayer 04 Leverkusen
+			FC Bayern München 0:0 FC Augsburg
+			1. FSV Mainz 05 0:0 FC Schalke 04
+			RB Leipzig 0:0 VfL Bochum 1848
+			VfL Wolfsburg 0:0 VfB Stuttgart
+			Borussia Dortmund 0:0 Bayer 04 Leverkusen
+			VfB Stuttgart 0:0 Eintracht Frankfurt
+			RB Leipzig 0:0 1. FC Union Berlin
+			TSG Hoffenheim 0:0 VfL Wolfsburg
+			SV Werder Bremen 0:0 FC Schalke 04
+			FC Augsburg 0:0 Sport-Club Freiburg
+			FC Bayern München 0:0 Hertha BSC
+			Borussia Münchengladbach 0:0 1. FSV Mainz 05
+			VfL Bochum 1848 0:0 1. FC Küln
+			VfL Bochum 1848 0:0 RB Leipzig
+			VfB Stuttgart 0:0 SV Werder Bremen
+			TSG Hoffenheim 0:0 Borussia Münchengladbach
+			FC Schalke 04 0:0 1. FSV Mainz 05
+			VfL Wolfsburg 0:0 FC Bayern München
+			Sport-Club Freiburg 0:0 Bayer 04 Leverkusen
+			Eintracht Frankfurt 0:0 1. FC Küln
+			FC Augsburg 0:0 1. FC Union Berlin
+			Borussia Dortmund 0:0 Hertha BSC
+			FC Schalke 04 0:0 Hertha BSC
+			Sport-Club Freiburg 0:0 RB Leipzig
+			1. FC Küln 0:0 FC Bayern München
+			Bayer 04 Leverkusen 0:0 VfB Stuttgart
+			SV Werder Bremen 0:0 VfL Bochum 1848
+			Eintracht Frankfurt 0:0 FC Augsburg
+			Borussia Dortmund 0:0 1. FC Union Berlin
+			Borussia Münchengladbach 0:0 TSG Hoffenheim
+			1. FSV Mainz 05 0:0 VfL Wolfsburg
+			Hertha BSC 0:0 1. FC Union Berlin
+			FC Augsburg 0:0 RB Leipzig
+			FC Bayern München 0:0 Bayer 04 Leverkusen
+			Sport-Club Freiburg 0:0 Borussia Münchengladbach
+			1. FSV Mainz 05 0:0 VfL Bochum 1848
+			VfB Stuttgart 0:0 VfL Wolfsburg
+			FC Schalke 04 0:0 Borussia Dortmund
+			1. FC Küln 0:0 Eintracht Frankfurt
+			TSG Hoffenheim 0:0 SV Werder Bremen
+			FC Schalke 04 0:0 Bayer 04 Leverkusen
+			FC Bayern München 0:0 Eintracht Frankfurt
+			FC Augsburg 0:0 Borussia Dortmund
+			1. FC Union Berlin 0:0 Sport-Club Freiburg
+			TSG Hoffenheim 0:0 1. FC Küln
+			VfL Bochum 1848 0:0 VfL Wolfsburg
+			RB Leipzig 0:0 VfB Stuttgart
+			Borussia Münchengladbach 0:0 Hertha BSC
+			SV Werder Bremen 0:0 1. FSV Mainz 05
+			Sport-Club Freiburg 0:0 VfB Stuttgart
+			RB Leipzig 0:0 Bayer 04 Leverkusen
+			VfL Bochum 1848 0:0 Eintracht Frankfurt
+			Hertha BSC 0:0 VfL Wolfsburg
+			1. FC Union Berlin 0:0 Borussia Dortmund
+			TSG Hoffenheim 0:0 FC Augsburg
+			Borussia Münchengladbach 0:0 FC Schalke 04
+			1. FC Küln 0:0 SV Werder Bremen
+			1. FC Küln 0:0 Hertha BSC
+			FC Augsburg 0:0 VfL Wolfsburg
+			TSG Hoffenheim 0:0 FC Schalke 04
+			Sport-Club Freiburg 0:0 Borussia Münchengladbach
+			1. FSV Mainz 05 0:0 RB Leipzig
+			VfB Stuttgart 0:0 SV Werder Bremen
+			Eintracht Frankfurt 0:0 Borussia Dortmund
+			VfL Bochum 1848 0:0 Bayer 04 Leverkusen
+			1. FC Union Berlin 0:0 FC Bayern München
+			1. FC Union Berlin 0:0 Borussia Münchengladbach
+			RB Leipzig 0:0 FC Schalke 04
+			SV Werder Bremen 0:0 Eintracht Frankfurt
+			VfB Stuttgart 0:0 1. FC Küln
+			Borussia Dortmund 0:0 Sport-Club Freiburg
+			VfL Wolfsburg 0:0 Bayer 04 Leverkusen
+			1. FSV Mainz 05 0:0 Hertha BSC
+			FC Bayern München 0:0 FC Augsburg
+			TSG Hoffenheim 0:0 VfL Bochum 1848
+			Hertha BSC 0:0 Bayer 04 Leverkusen
+			1. FC Küln 0:0 VfB Stuttgart
+			RB Leipzig 0:0 Borussia Dortmund
+			VfL Bochum 1848 0:0 TSG Hoffenheim
+			1. FC Union Berlin 0:0 Eintracht Frankfurt
+			FC Schalke 04 0:0 Sport-Club Freiburg
+			SV Werder Bremen 0:0 VfL Wolfsburg
+			FC Augsburg 0:0 Borussia Münchengladbach
+			FC Bayern München 0:0 1. FSV Mainz 05
+			VfL Bochum 1848 0:0 Borussia Münchengladbach
+			VfL Wolfsburg 0:0 RB Leipzig
+			Borussia Dortmund 0:0 SV Werder Bremen
+			Sport-Club Freiburg 0:0 Bayer 04 Leverkusen
+			FC Bayern München 0:0 1. FC Union Berlin
+			1. FC Küln 0:0 1. FSV Mainz 05
+			FC Schalke 04 0:0 Eintracht Frankfurt
+			FC Augsburg 0:0 VfB Stuttgart
+			Hertha BSC 0:0 TSG Hoffenheim
+			RB Leipzig 0:0 VfL Wolfsburg
+			1. FC Küln 0:0 FC Augsburg
+			FC Schalke 04 0:0 FC Bayern München
+			TSG Hoffenheim 0:0 Borussia Dortmund
+			Borussia Münchengladbach 0:0 VfB Stuttgart
+			Bayer 04 Leverkusen 0:0 Hertha BSC
+			1. FSV Mainz 05 0:0 VfL Bochum 1848
+			SV Werder Bremen 0:0 Sport-Club Freiburg
+			Eintracht Frankfurt 0:0 1. FC Union Berlin
+			VfB Stuttgart 0:0 FC Schalke 04
+			Hertha BSC 0:0 1. FC Union Berlin
+			FC Bayern München 0:0 Eintracht Frankfurt
+			1. FC Küln 0:0 Sport-Club Freiburg
+			Bayer 04 Leverkusen 0:0 VfL Bochum 1848
+			RB Leipzig 0:0 1. FSV Mainz 05
+			TSG Hoffenheim 0:0 FC Augsburg
+			Borussia Münchengladbach 0:0 SV Werder Bremen
+			Borussia Dortmund 0:0 VfL Wolfsburg
+			Borussia Münchengladbach 0:0 VfL Bochum 1848
+			1. FC Küln 0:0 SV Werder Bremen
+			Borussia Dortmund 0:0 VfB Stuttgart
+			Sport-Club Freiburg 0:0 Eintracht Frankfurt
+			Bayer 04 Leverkusen 0:0 1. FC Union Berlin
+			FC Bayern München 0:0 FC Schalke 04
+			Hertha BSC 0:0 RB Leipzig
+			FC Augsburg 0:0 1. FSV Mainz 05
+			TSG Hoffenheim 0:0 VfL Wolfsburg
+			1. FC Küln 0:0 RB Leipzig
+			VfL Wolfsburg 0:0 SV Werder Bremen
+			1. FSV Mainz 05 0:0 FC Bayern München
+			FC Schalke 04 0:0 VfB Stuttgart
+			VfL Bochum 1848 0:0 Hertha BSC
+			TSG Hoffenheim 0:0 1. FC Union Berlin
+			Eintracht Frankfurt 0:0 Sport-Club Freiburg
+			Borussia Münchengladbach 0:0 FC Augsburg
+			Borussia Dortmund 0:0 Bayer 04 Leverkusen
+			SV Werder Bremen 0:0 FC Augsburg
+			1. FC Union Berlin 0:0 VfB Stuttgart
+			1. FSV Mainz 05 0:0 Eintracht Frankfurt
+			VfL Wolfsburg 0:0 Borussia Dortmund
+			Sport-Club Freiburg 0:0 FC Bayern München
+			FC Schalke 04 0:0 Bayer 04 Leverkusen
+			RB Leipzig 0:0 1. FC Küln
+			TSG Hoffenheim 0:0 Hertha BSC
+			Borussia Münchengladbach 0:0 1. FC Küln
+			Bayer 04 Leverkusen 0:0 VfB Stuttgart
+			FC Bayern München 0:0 Sport-Club Freiburg
+			Borussia Dortmund 0:0 1. FSV Mainz 05
+			Eintracht Frankfurt 0:0 RB Leipzig
+			TSG Hoffenheim 0:0 SV Werder Bremen
+			FC Schalke 04 0:0 VfL Wolfsburg
+			Hertha BSC 0:0 VfL Bochum 1848
+			FC Augsburg 0:0 1. FC Union Berlin
+			1. FC Union Berlin 0:0 TSG Hoffenheim
+			Sport-Club Freiburg 0:0 1. FC Küln
+			Borussia Dortmund 0:0 Eintracht Frankfurt
+			Hertha BSC 0:0 SV Werder Bremen
+			Bayer 04 Leverkusen 0:0 Borussia Münchengladbach
+			FC Augsburg 0:0 FC Bayern München
+			FC Schalke 04 0:0 1. FSV Mainz 05
+			VfL Bochum 1848 0:0 RB Leipzig
+			VfB Stuttgart 0:0 VfL Wolfsburg
+			Bayer 04 Leverkusen 0:0 Borussia Dortmund
+			Eintracht Frankfurt 0:0 VfB Stuttgart
+			1. FC Union Berlin 0:0 RB Leipzig
+			VfL Wolfsburg 0:0 TSG Hoffenheim
+			FC Schalke 04 0:0 SV Werder Bremen
+			Sport-Club Freiburg 0:0 FC Augsburg
+			Hertha BSC 0:0 FC Bayern München
+			1. FSV Mainz 05 0:0 Borussia Münchengladbach
+			1. FC Küln 0:0 VfL Bochum 1848
+			RB Leipzig 0:0 VfL Bochum 1848
+			SV Werder Bremen 0:0 VfB Stuttgart
+			Borussia Münchengladbach 0:0 TSG Hoffenheim
+			1. FSV Mainz 05 0:0 FC Schalke 04
+			FC Bayern München 0:0 VfL Wolfsburg
+			Bayer 04 Leverkusen 0:0 Sport-Club Freiburg
+			1. FC Küln 0:0 Eintracht Frankfurt
+			1. FC Union Berlin 0:0 FC Augsburg
+			Hertha BSC 0:0 Borussia Dortmund
+			Hertha BSC 0:0 FC Schalke 04
+			RB Leipzig 0:0 Sport-Club Freiburg
+			FC Bayern München 0:0 1. FC Küln
+			VfB Stuttgart 0:0 Bayer 04 Leverkusen
+			VfL Bochum 1848 0:0 SV Werder Bremen
+			FC Augsburg 0:0 Eintracht Frankfurt
+			1. FC Union Berlin 0:0 Borussia Dortmund
+			TSG Hoffenheim 0:0 Borussia Münchengladbach
+			VfL Wolfsburg 0:0 1. FSV Mainz 05
+			1. FC Union Berlin 0:0 Hertha BSC
+			RB Leipzig 0:0 FC Augsburg
+			Bayer 04 Leverkusen 0:0 FC Bayern München
+			Borussia Münchengladbach 0:0 Sport-Club Freiburg
+			VfL Bochum 1848 0:0 1. FSV Mainz 05
+			VfL Wolfsburg 0:0 VfB Stuttgart
+			Borussia Dortmund 0:0 FC Schalke 04
+			Eintracht Frankfurt 0:0 1. FC Küln
+			SV Werder Bremen 0:0 TSG Hoffenheim
+			Bayer 04 Leverkusen 0:0 FC Schalke 04
+			Eintracht Frankfurt 0:0 FC Bayern München
+			Borussia Dortmund 0:0 FC Augsburg
+			Sport-Club Freiburg 0:0 1. FC Union Berlin
+			1. FC Küln 0:0 TSG Hoffenheim
+			VfL Wolfsburg 0:0 VfL Bochum 1848
+			VfB Stuttgart 0:0 RB Leipzig
+			Hertha BSC 0:0 Borussia Münchengladbach
+			1. FSV Mainz 05 0:0 SV Werder Bremen
+			VfB Stuttgart 0:0 Sport-Club Freiburg
+			Bayer 04 Leverkusen 0:0 RB Leipzig
+			Eintracht Frankfurt 0:0 VfL Bochum 1848
+			VfL Wolfsburg 0:0 Hertha BSC
+			Borussia Dortmund 0:0 1. FC Union Berlin
+			FC Augsburg 0:0 TSG Hoffenheim
+			FC Schalke 04 0:0 Borussia Münchengladbach
+			SV Werder Bremen 0:0 1. FC Küln
+			1. FSV Mainz 05 0:0 Borussia Münchengladbach
+			Borussia Münchengladbach 0:0 FC Bayern München
+			FC Bayern München 0:0 VfL Bochum 1848
+			VfL Bochum 1848 0:0 1. FSV Mainz 05\
+			""";
 
 	@Test
 	void finishedBundesliga_generateStatistigsTable_isCorrectForFirstThreeTeams() {

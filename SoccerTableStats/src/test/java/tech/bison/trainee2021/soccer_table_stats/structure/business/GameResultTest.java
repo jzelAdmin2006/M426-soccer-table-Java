@@ -78,9 +78,15 @@ class GameResultTest {
 						new Team("1. FC Köln"), 4, 3, "parse"),
 				Arguments.of("VfL Wolfsburg 2:1 FC Augsburg", InputFormat.TEXT, new Team("VfL Wolfsburg"),
 						new Team("FC Augsburg"), 2, 1, "parseDifferent"),
-				Arguments.of(
-						"{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3}",
-						InputFormat.JSON, new Team("Hertha BSC"), new Team("1. FC Köln"), 4, 3, "automaticallyParse"));
+				Arguments.of("""
+						{
+							"awayGoals": 3,
+							"awayTeam": "1. FC Köln",
+							"homeGoals": 4,
+							"homeTeam": "Hertha BSC"
+						}\
+						""", InputFormat.JSON, new Team("Hertha BSC"), new Team("1. FC Köln"), 4, 3,
+						"automaticallyParse"));
 	}
 
 	@ParameterizedTest(name = "gameResults{1}_{6}GameResults_isCorrect")
@@ -102,24 +108,31 @@ class GameResultTest {
 	}
 
 	private static Stream<Arguments> provideValuesForParsingMultipleGameResults() {
-		return Stream.of(Arguments.of(
-				"Hertha BSC 4:3 1. FC Köln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n" + "FC Schalke 04 2:2 TSG Hoffenheim\n"
-						+ "Borussia Mönchengladbach 0:2 Sport-Club Freiburg\n" + "RB Leipzig 0:4 1. FSV Mainz 05\n"
-						+ "SV Werder Bremen 0:2 VfB Stuttgart\n" + "Borussia Dortmund 3:2 Eintracht Frankfurt",
-				InputFormat.TEXT,
-				List.of(new Team("Hertha BSC"), new Team("VfL Wolfsburg"), new Team("FC Schalke 04"),
-						new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"), new Team("SV Werder Bremen"),
-						new Team("Borussia Dortmund")),
-				List.of(new Team("1. FC Köln"), new Team("FC Augsburg"), new Team("TSG Hoffenheim"),
-						new Team("Sport-Club Freiburg"), new Team("1. FSV Mainz 05"), new Team("VfB Stuttgart"),
-						new Team("Eintracht Frankfurt")),
-				List.of(4, 2, 2, 0, 0, 0, 3), List.of(3, 1, 2, 2, 4, 2, 2), "parse"),
-				Arguments.of(
-						"Hertha BSC 4:3 1. FC Köln\n" + "VfL Wolfsburg 2:1 FC Augsburg\n"
-								+ "FC Schalke 04 2:2 TSG Hoffenheim\n"
-								+ "Borussia Mönchengladbach 0:2 Sport-Club Freiburg\n"
-								+ "RB Leipzig 0:4 1. FSV Mainz 05\n" + "SV Werder Bremen 0:2 VfB Stuttgart",
-						InputFormat.TEXT,
+		return Stream.of(
+				Arguments.of("""
+						Hertha BSC 4:3 1. FC Köln
+						VfL Wolfsburg 2:1 FC Augsburg
+						FC Schalke 04 2:2 TSG Hoffenheim
+						Borussia Mönchengladbach 0:2 Sport-Club Freiburg
+						RB Leipzig 0:4 1. FSV Mainz 05
+						SV Werder Bremen 0:2 VfB Stuttgart
+						Borussia Dortmund 3:2 Eintracht Frankfurt\
+						""", InputFormat.TEXT,
+						List.of(new Team("Hertha BSC"), new Team("VfL Wolfsburg"), new Team("FC Schalke 04"),
+								new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),
+								new Team("SV Werder Bremen"), new Team("Borussia Dortmund")),
+						List.of(new Team("1. FC Köln"), new Team("FC Augsburg"), new Team("TSG Hoffenheim"),
+								new Team("Sport-Club Freiburg"), new Team("1. FSV Mainz 05"), new Team("VfB Stuttgart"),
+								new Team("Eintracht Frankfurt")),
+						List.of(4, 2, 2, 0, 0, 0, 3), List.of(3, 1, 2, 2, 4, 2, 2), "parse"),
+				Arguments.of("""
+						Hertha BSC 4:3 1. FC Köln
+						VfL Wolfsburg 2:1 FC Augsburg
+						FC Schalke 04 2:2 TSG Hoffenheim
+						Borussia Mönchengladbach 0:2 Sport-Club Freiburg
+						RB Leipzig 0:4 1. FSV Mainz 05
+						SV Werder Bremen 0:2 VfB Stuttgart\
+						""", InputFormat.TEXT,
 						List.of(new Team("Hertha BSC"), new Team("VfL Wolfsburg"), new Team("FC Schalke 04"),
 								new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),
 								new Team("SV Werder Bremen")),
@@ -127,15 +140,52 @@ class GameResultTest {
 								new Team("Sport-Club Freiburg"), new Team("1. FSV Mainz 05"),
 								new Team("VfB Stuttgart")),
 						List.of(4, 2, 2, 0, 0, 0), List.of(3, 1, 2, 2, 4, 2), "parseDifferent"),
-				Arguments.of(
-						"[{\"homeTeam\":\"Hertha BSC\",\"awayTeam\":\"1. FC Köln\",\"homeGoals\":4,\"awayGoals\":3},"
-								+ "{\"homeTeam\":\"VfL Wolfsburg\",\"awayTeam\":\"FC Augsburg\",\"homeGoals\":2,\"awayGoals\":1},"
-								+ "{\"homeTeam\":\"FC Schalke 04\",\"awayTeam\":\"TSG Hoffenheim\",\"homeGoals\":2,\"awayGoals\":2},"
-								+ "{\"homeTeam\":\"Borussia Mönchengladbach\",\"awayTeam\":\"Sport-Club Freiburg\",\"homeGoals\":0,\"awayGoals\":2},"
-								+ "{\"homeTeam\":\"RB Leipzig\",\"awayTeam\":\"1. FSV Mainz 05\",\"homeGoals\":0,\"awayGoals\":4},"
-								+ "{\"homeTeam\":\"SV Werder Bremen\",\"awayTeam\":\"VfB Stuttgart\",\"homeGoals\":0,\"awayGoals\":2},"
-								+ "{\"homeTeam\":\"Borussia Dortmund\",\"awayTeam\":\"Eintracht Frankfurt\",\"homeGoals\":3,\"awayGoals\":2}]",
-						InputFormat.JSON,
+				Arguments.of("""
+						[
+						    {
+							    "awayGoals": 3,
+							    "awayTeam": "1. FC Köln",
+							    "homeGoals": 4,
+							    "homeTeam": "Hertha BSC"
+						    },
+						    {
+							    "awayGoals": 1,
+							    "awayTeam": "FC Augsburg",
+							    "homeGoals": 2,
+							    "homeTeam": "VfL Wolfsburg"
+						    },
+						    {
+							    "awayGoals": 2,
+							    "awayTeam": "TSG Hoffenheim",
+							    "homeGoals": 2,
+							    "homeTeam": "FC Schalke 04"
+						    },
+						    {
+							    "awayGoals": 2,
+							    "awayTeam": "Sport-Club Freiburg",
+							    "homeGoals": 0,
+							    "homeTeam": "Borussia Mönchengladbach"
+						    },
+						    {
+							    "awayGoals": 4,
+							    "awayTeam": "1. FSV Mainz 05",
+							    "homeGoals": 0,
+							    "homeTeam": "RB Leipzig"
+						    },
+						    {
+							    "awayGoals": 2,
+							    "awayTeam": "VfB Stuttgart",
+							    "homeGoals": 0,
+							    "homeTeam": "SV Werder Bremen"
+						    },
+						    {
+							    "awayGoals": 2,
+							    "awayTeam": "Eintracht Frankfurt",
+							    "homeGoals": 3,
+							    "homeTeam": "Borussia Dortmund"
+						    }
+						]\
+						""", InputFormat.JSON,
 						List.of(new Team("Hertha BSC"), new Team("VfL Wolfsburg"), new Team("FC Schalke 04"),
 								new Team("Borussia Mönchengladbach"), new Team("RB Leipzig"),
 								new Team("SV Werder Bremen"), new Team("Borussia Dortmund")),
@@ -149,9 +199,14 @@ class GameResultTest {
 	void gameResultJson_parseGameResult_dtoIsCorrect() {
 		final Gson gson = new Gson();
 
-		final GameResultDto gameResult = gson.fromJson(
-				"{\"homeTeam\":\"FC Wil 1900\",\"awayTeam\":\"SC Kriens\",\"homeGoals\":1,\"awayGoals\":4}",
-				GameResultDto.class);
+		final GameResultDto gameResult = gson.fromJson("""
+				{
+					"awayGoals": 4,
+					"awayTeam": "SC Kriens",
+					"homeGoals": 1,
+					"homeTeam": "FC Wil 1900"
+				}\
+				""", GameResultDto.class);
 
 		assertThat(gameResult.getHomeTeam()).isEqualTo("FC Wil 1900");
 		assertThat(gameResult.getAwayTeam()).isEqualTo("SC Kriens");
@@ -165,11 +220,28 @@ class GameResultTest {
 
 		final Type gameResultListType = new TypeToken<List<GameResultDto>>() {
 		}.getType();
-		final List<GameResultDto> gameResults = gson.fromJson(
-				"[{\"homeTeam\":\"FC Vaduz\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":3,\"awayGoals\":0},"
-						+ "{\"homeTeam\":\"FC Schaffhausen\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":0,\"awayGoals\":0}"
-						+ ",{\"homeTeam\":\"FC Thun\",\"awayTeam\":\"FC Winterthur\",\"homeGoals\":3,\"awayGoals\":1}]",
-				gameResultListType);
+		final List<GameResultDto> gameResults = gson.fromJson("""
+				[
+				    {
+					    "awayGoals": 0,
+					    "awayTeam": "FC Winterthur",
+					    "homeGoals": 3,
+					    "homeTeam": "FC Vaduz"
+				    },
+				    {
+					    "awayGoals": 0,
+					    "awayTeam": "FC Winterthur",
+					    "homeGoals": 0,
+					    "homeTeam": "FC Schaffhausen"
+				    },
+				    {
+					    "awayGoals": 1,
+					    "awayTeam": "FC Winterthur",
+					    "homeGoals": 3,
+					    "homeTeam": "FC Thun"
+				    }
+				]\
+				""", gameResultListType);
 
 		assertThat(gameResults).containsExactly(new GameResultDto("FC Vaduz", "FC Winterthur", 3, 0),
 				new GameResultDto("FC Schaffhausen", "FC Winterthur", 0, 0),
@@ -180,9 +252,15 @@ class GameResultTest {
 	void nullInputFormat_parseGameResults_isIllegalArgument() {
 		final InputFormat inputFormat = null;
 
-		final ThrowingCallable shouldRaiseThrowable = () -> GameResult.parseGameResults(
-				"{\"homeTeam\":\"FC Wil 1900\",\"awayTeam\":\"SC Kriens\",\"homeGoals\":1,\"awayGoals\":4}",
-				inputFormat);
+		final ThrowingCallable shouldRaiseThrowable = () -> GameResult
+				.parseGameResults("""
+						{
+							"awayGoals": 4,
+							"awayTeam": "SC Kriens",
+							"homeGoals": 1,
+							"homeTeam": "FC Wil 1900"
+						}\
+						""", inputFormat);
 
 		assertThatThrownBy(shouldRaiseThrowable).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("cannot be null");
