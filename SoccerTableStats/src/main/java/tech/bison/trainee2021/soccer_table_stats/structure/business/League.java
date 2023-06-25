@@ -73,25 +73,13 @@ public class League {
 	}
 
 	private int findLargestValueAmountInTable(Map<Team, Map<StatisticsTableColumn, Integer>> statsTable) {
-		int largestValueAmount = 0;
-		for (Map<StatisticsTableColumn, Integer> teamStat : statsTable.values()) {
-			for (int amount : mapToList(teamStat.values(), Math::abs)) {
-				if (amount > largestValueAmount) {
-					largestValueAmount = amount;
-				}
-			}
-		}
-		return largestValueAmount;
+		return statsTable.values().stream().flatMap(teamStat -> mapToList(teamStat.values(), Math::abs).stream())
+				.max(Integer::compareTo).orElse(0);
 	}
 
 	private Team findTeamWithLongestName(Map<Team, Map<StatisticsTableColumn, Integer>> statsTable) {
-		Team teamWithLongestName = new Team("");
-		for (Team team : statsTable.keySet()) {
-			if (team.getName().length() > teamWithLongestName.getName().length()) {
-				teamWithLongestName = team;
-			}
-		}
-		return teamWithLongestName;
+		return statsTable.keySet().stream().max(Comparator.comparingInt(team -> team.getName().length()))
+				.orElse(new Team(""));
 	}
 
 	public void addGameResults(List<GameResult> newGameResults) {
