@@ -26,7 +26,7 @@ class InputFormatTest {
 				Arguments.of("foobar", InputFormat.TEXT, "no"),
 				Arguments.of(
 						"foobar." + Stream.generate(() -> randomAlphabetic(3, 6))
-								.filter(s -> !s.equalsIgnoreCase("json")).findFirst().orElse("asdfqwert"),
+								.filter(s -> !"json".equalsIgnoreCase(s)).findFirst().orElse("asdfqwert"),
 						InputFormat.TEXT, "random"));
 	}
 
