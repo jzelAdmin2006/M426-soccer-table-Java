@@ -2,7 +2,7 @@
 
 ## Original task description
 
-The original task is straightforward. Both the txt and JSON files from the [input directory](./input) should be parsed and converted to scrts files, of which there is already an example in the [output directory](./output).
+The original task that resulted in this repository is straightforward. Both the txt and JSON files from the [input directory](./input) should be parsed and converted to scrts files, of which there is already an example in the [output directory](./output).
 This task can be used to quickly introduce the basics of an unfamiliar programming language.
 
 ![Soccer Table Statistics Theme Image](./img/channels4_profile.jpg)
